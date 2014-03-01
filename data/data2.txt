@@ -1,0 +1,17 @@
+2. [[ pencil,  bus, cat,  bike,  car,  dog,  pen], [ apple,  orange]] stop criteria =2*0.94/0.9299999999999999= 1.010752688172043
+3. [[ pencil,  bus,  bike,  car,  pen], [cat,  dog], [ apple,  orange]] stop criteria =3*0.9299999999999999/0.9266666666666667= 1.003597122302158
+4. [[ bus,  bike,  car], [ pencil,  pen], [ apple,  orange], [cat,  dog]] stop criteria =4*0.9/0.9249999999999999= 0.972972972972973
+5. [[ bus], [ pencil,  pen], [ bike,  car], [cat,  dog], [ apple,  orange]] stop criteria =5*1.83/0.9229999999999998= 1.9826652221018424
+6. [[ bus], [ orange], [ pencil,  pen], [ bike,  car], [ apple], [cat,  dog]] stop criteria =6*3.7800000000000002/0.9258333333333333= 4.0828082808280834
+7. [[ bus], [ apple], [cat,  dog], [ bike], [ orange], [ pencil,  pen], [ car]] stop criteria =7*5.46/0.9299999999999998= 5.870967741935485
+8. [[ bus], [cat], [ apple], [ bike], [ orange], [ pencil,  pen], [ car], [ dog]] stop criteria =8*7.38/0.9285714285714286= 7.947692307692307
+9. [[ pencil], [ bus], [cat], [ apple], [ orange], [ bike], [ car], [ dog], [ pen]] stop criteria =9*9.0/0.0= 0.0
+1 0.0;
+2 1.010752688172043;
+3 1.003597122302158;
+4 0.972972972972973;
+5 1.9826652221018424;
+6 4.0828082808280834;
+7 5.870967741935485;
+8 7.947692307692307;
+9 0.0;

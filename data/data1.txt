@@ -1,0 +1,15 @@
+2. [[ swimming], [ restaurant,  cafe, cafeteria,  arena,  stadium,  theater,  cinema]] stop criteria =2*1.92/0.9299999999999999= 2.064516129032258
+3. [[ arena,  stadium], [ restaurant,  cafe, cafeteria,  theater,  cinema], [ swimming]] stop criteria =3*1.9/0.9266666666666667= 2.0503597122302155
+4. [[ restaurant,  cafe, cafeteria], [ theater,  cinema], [ arena,  stadium], [ swimming]] stop criteria =4*1.56/0.9133333333333334= 1.7080291970802919
+5. [[ restaurant,  cafe, cafeteria], [ arena,  stadium], [ theater], [ swimming], [ cinema]] stop criteria =5*3.56/0.9071428571428571= 3.924409448818898
+6. [[ restaurant, cafeteria], [ cafe], [ arena,  stadium], [ theater], [ swimming], [ cinema]] stop criteria =6*4.0/0.8388888888888888= 4.768211920529802
+7. [[ restaurant], [ cafe], [cafeteria], [ arena,  stadium], [ swimming], [ theater], [ cinema]] stop criteria =7*6.0/0.9183333333333333= 6.533575317604356
+8. [[ restaurant], [ cafe], [cafeteria], [ swimming], [ arena], [ stadium], [ theater], [ cinema]] stop criteria =8*8.0/0.0= 0.0
+1 0.0;
+2 2.064516129032258;
+3 2.0503597122302155;
+4 1.7080291970802919;
+5 3.924409448818898;
+6 4.768211920529802;
+7 6.533575317604356;
+8 0.0;

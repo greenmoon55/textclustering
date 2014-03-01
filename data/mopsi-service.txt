@@ -1,0 +1,29 @@
+pharmacy, maintenance, Bar, cafe, bakery, lunch, Restaurant, physiotherapy, gym, rehabilitation, Funeral, flower, Estate, Property, foot, therapist, Therapy, fishing, bike, Sport , hairdressing, salon, barber, fabric, beauty, beautician, watchmaker, Jewelry, paint, wallpaper, clothing, outlet, eye, optician, newspaper, catering, mail, grocery, hardware
+
+dog, cat, orange, apple, banana, vitamin, strawberry, duck, cafe, bar, wolf, grape, fruit, sheep, coffeehouse, bear, pig, bike, bicycle, car, bus, ship
+
+data1: cafeteria, cinema, cafe, theater, arena, stadium, restaurant, swimming
+
+data2: cat, dog, orange, apple, car, bus, bike, pen, pencil
+
+wrist, ankle, shoulder, arm, leg, hand, foot, head, nose, finger, toe, face, ear, eye, tooth, dog, cat, puppy, kitten, cow, mouse, turtle, oyster, lion, bull, chicago, atlanta, montreal, nashville, tokyo, china, russia, africa, asia, europe, america, brazil, moscow, france, hawaii
+
+
+5 groups:
+Red,Pink,Plum,Garnet,Coral,Henna,Prune,Scarlet, Tomato,Pineapple,Watermelon,Banana,Shaddock, Eagle,Elephant,Fly,Fox,Frog,Goat,Goose,Hen,Hawk,Horse,Lion,Mouse,Penguin,Swan,Tiger,Tomcat, Accountant,Actor,actress,anchor, anemia,appendicitis,arthritis,bronchitis,cancer,catarrh
+
+5 groups:
+Red,Pink,Plum,Garnet,Coral,Henna,Prune,Scarlet,Orange,Maize,Ivory,Tan,Green,Aquamarine,Blue,Azure,Ultramarine,Indigo,Azure,Purple,Violet,Amethyst,Lilac,Raisin,Lilac,Black,White,Grey,Gray,Doe,Brown,Gold,Zinc,Rust,Linen,Khaki,Ivory,navy,sage,taupe, Tomato,Pineapple,Watermelon,Banana,Shaddock,Apple,Strawberry,Blackberry,Mango,Papaya,pawpaw,Apricot,Nectarine,Persimmon,Pomegranate,Jackfruit,Cumquat,Litchi,Greengage,Haw,Plum,Loquat,Tangerine,Guava,Lettuce,Radish,Carrot,Leek,Pea,Potato,Mushroom,Spinach,Laver,Eggplant,Caraway,Loquat,Tangerine,Guava,coconut,cherry, Dog,Cat,Bird,Monkey,Panda,Fish,Pig,Bear,Duck,Rabbit,Sheep,Ant,Donkey,Bear,Bull,Ox,Buffalo,Bee,Butterfly,Chicken,Cow,Crab,Deer,Dove,Eagle,Elephant,Fly,Fox,Frog,Goat,Goose,Hen,Hawk,Horse,Lion,Mouse,Penguin,Swan,Tiger,Tomcat, Accountant,Actor,actress,anchor,announcer,architect,artist,auditor,baker,barber,blacksmith,boxer,butcher,carpenter,cartoonist,chef,chemist,cobbler,cook,dancer,dentist,designer,detective,doctor,driver,dustman,editor,electrician,engineer,farmer,fireman,fisherman,florist,flyer,gardener,geologist,guard,guide,housekeeper,housewife,interpreter,journalist,judge,lawyer,miner,model,policeman,postman,priest,teacher, anemia,appendicitis,arthritis,bronchitis,cancer,catarrh,varicella,cholera,cold,diabetes,diphtheria,eczema,epilepsy,erysipelas,gangrene,rubella,gout,headache,flu,insanity,leukemia,malaria,malnutrition,measles,migraine,mumps,neuralgia,neurasthenia,paralysis,peritonitis,pharyngitis,pneumonia,poliomyelitis,rabies,rheumatism,scabies,sciatica,sinusitis,smallpox,tetanus
+
+8 groups:
+hostel, hostelry, lodge, auberge, film, cinema, movie, luncheon, lunch, snack, collation, meal, cafeteria, coffeehouse, cafe, eatery, restaurant, arena, stadium, gymnasium, gym, pharmacy, shop, market, outlet, stall, store, drugstore, cubicle, kiosk, booth, barroom, saloon, taproom, bar, ginmill
+
+
+
+
+
+
+
+
+
+
