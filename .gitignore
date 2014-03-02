@@ -10,3 +10,5 @@
 .metadata
 .settings
 .classpath
+
+/target/

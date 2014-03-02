@@ -24,4 +24,11 @@
       </plugin>
     </plugins>
   </build>
+  <dependencies>
+  	<dependency>
+  		<groupId>edu.mit</groupId>
+  		<artifactId>jwi</artifactId>
+  		<version>2.2.3</version>
+  	</dependency>
+  </dependencies>
 </project>

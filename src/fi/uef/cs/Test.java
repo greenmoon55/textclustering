@@ -31,7 +31,7 @@ public class Test {
 			wordsimilarityValue2=wSimilarity.getWordnetSimilarityAllByMeasure(word1, word2, "n", "1");
 			wordsimilarityValue3=wSimilarity.getWordnetSimilarityByMeasure(word1, word2, "n", "3");
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
