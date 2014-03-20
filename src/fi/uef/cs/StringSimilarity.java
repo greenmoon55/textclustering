@@ -13,33 +13,33 @@ public class StringSimilarity {
 	float result;
 	float resultfinal;
 
-	//4. Levenshtein 5. q-grams 6. cosin 7. dice
+	// 4. Levenshtein 5. q-grams 6. cosin 7. dice
 	public float getStringSimilarity(String word1, String word2, String type,
 			int method) throws IOException {
-		
+
 		if (method == 5) {
 			metric = new Levenshtein();
 			result = metric.getSimilarity(word1, word2);
 			return result;
-			
-		} else if (method== 6) {
+
+		} else if (method == 6) {
 			metric = new QGramsDistance();
 			result = metric.getSimilarity(word1, word2);
 			return result;
-			
+
 		} else if (method == 7) {
 			metric = new CosineSimilarity();
 			result = metric.getSimilarity(word1, word2);
 			return result;
-			
+
 		} else if (method == 8) {
 			metric = new DiceSimilarity();
 			result = metric.getSimilarity(word1, word2);
-			resultfinal=((int)(result*100))/100;
+			resultfinal = ((int) (result * 100)) / 100;
 			return result;
-			
-		}else {
-			result=-1;
+
+		} else {
+			result = -1;
 			return result;
 		}
 
