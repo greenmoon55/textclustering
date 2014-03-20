@@ -28,66 +28,51 @@ public class WordnetSimilarity {
 	JiangAndConrath jiang = ws.getJiangAndConrath();
 
 	public double getWordnetSimilarity(String word1, String word2, String type,
-			int method) {
-		double similarityValue = 0;
-
+			int method, boolean firstSenseOnly) {
 		// 1 Jiang
-		JiangAndConrath jiang = null;
+		JiangAndConrath jiang = ws.getJiangAndConrath();
 		// 2 Wu
-		WuAndPalmer wu = null;
+		WuAndPalmer wu = ws.getWuAndPalmer();
 		// 3 Lin
-		Lin lin = null;
+		Lin lin = ws.getLin();
 		// 4 Path
-		Path path = null;
-
-		if (method == 1) {
-			jiang = ws.getJiangAndConrath();
-			similarityValue = jiang.max(word1, word2, type);
-			return similarityValue;
-		} else if (method == 2) {
-			wu = ws.getWuAndPalmer();
-			similarityValue = wu.max(word1, word2, type);
-			return similarityValue;
-		} else if (method == 3) {
-			lin = ws.getLin();
-			similarityValue = lin.max(word1, word2, type);
-			return similarityValue;
-		} else if (method == 4) {
-			path = ws.getPath();
-			similarityValue = path.max(word1, word2, type);
-			return similarityValue;
+		Path path = ws.getPath();
+		if (firstSenseOnly) {
+			if (method == 1) {
+				double similarityValue = jiang.jcn(word1, 1, word2, 1,
+						type);
+				return similarityValue;
+			} else if (method == 2) {
+				double similarityValue = lin.lin(word1, 1, word2, 1, type);
+				return similarityValue;
+			} else if (method == 3) {
+				double similarityValue = path.path(word1, 1, word2, 1, type);
+				return similarityValue;
+			} else if (method == 4) {
+				double similarityValue = wup.wup(word1, 1, word2, 1, type);
+				return similarityValue;
+			} else {
+				return 0;
+			}
 		} else {
-			similarityValue = -1;
-			return similarityValue;
+			double similarityValue = 0;
+			if (method == 1) {
+				similarityValue = jiang.max(word1, word2, type);
+				return similarityValue;
+			} else if (method == 2) {
+				similarityValue = wu.max(word1, word2, type);
+				return similarityValue;
+			} else if (method == 3) {
+				similarityValue = lin.max(word1, word2, type);
+				return similarityValue;
+			} else if (method == 4) {
+				similarityValue = path.max(word1, word2, type);
+				return similarityValue;
+			} else {
+				similarityValue = -1;
+				return similarityValue;
+			}
 		}
-	}
-
-	// get the similarity by just comparing the first meaning of two words
-	public double getWordnetSimilarity(String word1, String word2, String type) {
-
-		// JiangAndConrath wup=ws.getJiangAndConrath();
-
-		// TreeMap<String, Double> scores1 = jcn.jcn("apple", "banana", "n"); //
-		// all
-
-		// double similarityValue = wup.max(word1, word2, type);
-		// double similarityValue = wup.wup(word1, 1, word2, 1, type);
-		double similarityValue = jiang.max(word1, word2, type);
-		return similarityValue;
-	}
-
-	// get the similarity by just comparing the all the meaning of two words
-	public double getWordnetSimilarityAll(String word1, String word2,
-			String type) {
-
-		// JiangAndConrath wup=ws.getJiangAndConrath();
-
-		// TreeMap<String, Double> scores1 = jcn.jcn("apple", "banana", "n"); //
-		// all
-
-		// double similarityValue = wup.max(word1, word2, type);
-		double similarityValue = wup.max(word1, word2, type);
-		return similarityValue;
 	}
 
 	/*

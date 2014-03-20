@@ -39,7 +39,7 @@ public class SimilariyMetric {
 			
 		} 
 		
-		String similariString = getSimilarity(word1, word2, method, type);
+		String similariString = getSimilarityNew(word1, word2, method, type);
 		System.out.println("The similarity of "+word1 +" and " +word2+" is: "+similariString);
 		
 		
@@ -110,6 +110,39 @@ public class SimilariyMetric {
 		}
 		java.text.DecimalFormat   df=new   java.text.DecimalFormat("#0.00"); 
 		String similarityValue1 = df.format(similarityValue);		
+		return similarityValue1;
+	}
+	
+	public static String getSimilarityNew(String word1, String word2,
+			int method, String type) {
+		double similarityValue = 0;
+		try {
+			// 1.Jiang 2.Wu 3.Lin 4.Path 5.Levenshtein
+			if (method == 1 || method == 2 || method == 3 || method == 4) {
+				WordnetSimilarity wSimilarity = new WordnetSimilarity();
+				similarityValue = wSimilarity.getWordnetSimilarity(word1,
+						word2, type, method);
+				if (similarityValue > 1) {
+					similarityValue = 1;
+				} else if (similarityValue < 0) {
+					similarityValue = 0;
+				}
+
+			} else if (method == 5 || method == 6 || method == 7 || method == 8) {
+				StringSimilarity stringSimilarity = new StringSimilarity();
+				similarityValue = stringSimilarity.getStringSimilarity(word1,
+						word2, type, method);
+
+			} else {
+				System.out.println("Sorry, this method doesn't exist!");
+				similarityValue = -1;
+			}
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
+		String similarityValue1 = df.format(similarityValue);
 		return similarityValue1;
 	}
 
