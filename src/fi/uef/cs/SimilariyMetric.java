@@ -44,15 +44,29 @@ public class SimilariyMetric {
 		
 	}
 	
+	/**
+	 * @param word1
+	 * @param word2
+	 * @param method
+	 * @param type 1.Jiang 2.Wu 3.Lin 4.Path 5.Levenshtein 6. q-grams 7. cosin 8. dice
+	 * @return similarity compared with all senses of the two words
+	 */
 	public static String getSimilarity(String word1, String word2, int method, String type){
 		return getSimilarity(word1, word2, method, type, false);
 	}
 	
+	/**
+	 * @param word1
+	 * @param word2
+	 * @param method
+	 * @param type 1.Jiang 2.Wu 3.Lin 4.Path 5.Levenshtein 6. q-grams 7. cosin 8. dice
+	 * @param firstSenseOnly
+	 * @return
+	 */
 	public static String getSimilarity(String word1, String word2,
 			int method, String type, boolean firstSenseOnly) {
 		double similarityValue = 0;
 		try {
-			// 1.Jiang 2.Wu 3.Lin 4.Path 5.Levenshtein
 			if (method == 1 || method == 2 || method == 3 || method == 4) {
 				WordnetSimilarity wSimilarity = new WordnetSimilarity();
 				similarityValue = wSimilarity.getWordnetSimilarity(word1,

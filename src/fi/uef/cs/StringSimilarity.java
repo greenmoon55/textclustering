@@ -13,7 +13,7 @@ public class StringSimilarity {
 	float result;
 	float resultfinal;
 
-	// 4. Levenshtein 5. q-grams 6. cosin 7. dice
+	// 5. Levenshtein 6. q-grams 7. cosin 8. dice
 	public float getStringSimilarity(String word1, String word2, String type,
 			int method) throws IOException {
 
