@@ -46,6 +46,9 @@ public class TutorialKMeans {
     	System.out.println(System.getProperty("user.dir"));
         /* Load a dataset */
         Dataset data = FileHandler.loadDataset(new File("devtools/data/iris.data"), 4, ",");
+        for (int i = 0; i < data.size(); i++) {
+        	System.out.println(data.get(i));
+        }
         /*
          * Create a new instance of the KMeans algorithm, with no options
          * specified. By default this will generate 4 clusters.
