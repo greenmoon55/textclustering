@@ -18,8 +18,7 @@ import com.aliasi.util.ScoredObject;
 import fi.uef.cs.WordnetSimilarity;
 
 public class Stop_criteria {
-	WordnetSimilarity wSimilarity=new WordnetSimilarity();
-
+	WordnetSimilarity wSimilarity = new WordnetSimilarity();
 	/**
 	 * @param args
 	 * @throws IOException
@@ -94,154 +93,159 @@ public class Stop_criteria {
 //		sswList=test.getSSWListDetail(inputSet, type, method);
 //		System.out.println(sswList.isEmpty());
 		
-		test.stopCriteriaList(inputSet, type, method,formula,detail, normalized );
-//		test.stopCriteriaList(inputSet, "n", "lin","1");
+		test.stopCriteriaList(inputSet, type, method, formula, detail,
+				normalized);
+		//		test.stopCriteriaList(inputSet, "n", "lin","1");
 //		test.stopCriteriaList(inputSet, "n", "lin","3");
 
 	}
 
-	// lin, wup, path, jiang method third argument
-	// stop certeria formula choose: 1. log Log(SSB/SSW) 2. k * ssw / ssb 3.
-	// [trace B/(k-1)]/[trace W/(n-k)]
-	/*1. type noun or verb
-	 *2. method 1.lin 2.wup 3.path 4.jiang
-	 *3. formula  1.Calinski & Harabasz   CH=[SSB/(m-1)]/[SSW/(n-m)]
-	 *            2.Hartigan   H=log(SSB/SSW)
-	 *            3.WB-index   WB=m*SSW/SSB
-	 *4. detail y or n        
+	/**
+	 * @param inputSet input strings
+	 * @param type noun or verb
+	 * @param method 1.lin 2.wup 3.path 4.jiang
+	 * @param formula 
+	 * 1.Calinski & Harabasz   CH=[SSB/(m-1)]/[SSW/(n-m)]
+	 * 2.Hartigan   H=log(SSB/SSW)
+	 * 3.WB-index   WB=m*SSW/SSB
+	 * @param detail y/n
+	 * @param normalized y/n
+	 * @return
+	 * @throws IOException
 	 */
 	public HashMap<Set<Set<String>>, Double> stopCriteriaList(
 			Set<String> inputSet, String type, int method, int formula, String detail, String normalized)
 			throws IOException {
+		
+		Dendrogram<String> dendrogram = singleLinkageClustering(
+				inputSet, type, method);
+		
 		double value;
-		int n=inputSet.size();
+		int inputSize = inputSet.size();
 		HashMap<Set<Set<String>>, Double> valueList = new HashMap<Set<Set<String>>, Double>();
 
-		List<Double> scList =new ArrayList<Double>();
-		
-		//1.Jiang 2.Wup 3.Lin 4.Path
-		List<Double> sswList =new ArrayList<Double>();
-		List<Double> ssbList =new ArrayList<Double>();
-		if(detail.trim().equalsIgnoreCase("y")){
-		 sswList = getSSWListDetail(inputSet, type, method, normalized);
-		 ssbList = getSSBListDetail(inputSet, type, method, normalized);
-		}else{
-			sswList=getSSWList(inputSet, type, method,normalized);
-			ssbList=getSSBList(inputSet, type, method,normalized);
+		List<Double> scList = new ArrayList<Double>();
+
+		List<Double> sswList = new ArrayList<Double>();
+		List<Double> ssbList = new ArrayList<Double>();
+		if (detail.trim().equalsIgnoreCase("y")) {
+			sswList = getSSWListDetail(inputSet, type, method, normalized, dendrogram);
+			ssbList = getSSBListDetail(inputSet, type, method, normalized, dendrogram);
+		} else {
+			sswList = getSSWList(inputSet, type, method, normalized, dendrogram);
+			ssbList = getSSBList(inputSet, type, method, normalized, dendrogram);
 		}
 
 		Object[] sswArray = sswList.toArray();
 		Object[] ssbArray = ssbList.toArray();
-		
-		
-		Dendrogram<String> dendrogram = single_linkage_clustering_method(inputSet, type, method);
-		
-		String methodnameString=null;
-		if(method==1){
-			methodnameString="Similarity method:Jiang";
-		}else if (method==2) {
-			methodnameString="Similarity method:Wup";
-		} else if(method ==3) {
-			methodnameString="Similarity method:Lin";
-		}else if (method==4) {
-			methodnameString="Similarity method:Path";
-		}else {
+
+		String methodnameString = null;
+		if (method == 1) {
+			methodnameString = "Similarity method:Jiang";
+		} else if (method == 2) {
+			methodnameString = "Similarity method:Wup";
+		} else if (method == 3) {
+			methodnameString = "Similarity method:Lin";
+		} else if (method == 4) {
+			methodnameString = "Similarity method:Path";
+		} else {
 			System.out.println("No such similairty method.");
-		
 		}
 
 		if (formula == 1) {
-			System.out.println(" Calinski & Harabasz "+"CH=[SSB/(m-1)]/[SSW/(n-m)]  "+methodnameString );
+			System.out.println(" Calinski & Harabasz "
+					+ "CH=[SSB/(m-1)]/[SSW/(n-m)]  " + methodnameString);
 			int k = 1;
 			for (int i = 0; i < sswArray.length; i++) {
 				Double ssw = (Double) sswArray[i];
 				Double ssb = (Double) ssbArray[i];
 
-				if ( ssw!=0) {
-					double temp1=ssb/(k-1);
-					double temp2=ssw/(n-k);
-					value =temp1/temp2;
+				if (ssw != 0) {
+					double temp1 = ssb / (k - 1);
+					double temp2 = ssw / (inputSize - k);
+					value = temp1 / temp2;
 
-				} else {
-					value = 0;}
-				Set<Set<String>> slKClustering = dendrogram.partitionK(i + 1);
-				if(k!=1)
-				System.out.println(k+". "+slKClustering + "  stop criteria= [" + ssb +"/("+k+"-1)]/[" +ssw+"/("+n+"-"+k+")]= "+
-						 + value);
-				valueList.put(slKClustering, value);
-				scList.add(value);
-				k++;
-			}
-		} else if(formula==2)  {
-			System.out.println("Hartigan   H=log(SSB/SSW)   "+methodnameString );
-			for (int i = 0; i < sswArray.length; i++) {
-				Double ssw = (Double) sswArray[i];
-				Double ssb = (Double) ssbArray[i];
-				
-				if (  ssw!=0) {										
-				 value =Math.log(ssb/ssw);
-			
-				}else{
-					value=0;
-				}
-				Set<Set<String>> slKClustering = dendrogram.partitionK(i + 1);
-				if(i!=0)
-				System.out.println(i+1+".  "+slKClustering +"  stop criteria= "+ "log("+ssb+"/"+ssw+") =  "+value );
-				valueList.put(slKClustering, value);
-				scList.add(value);
-			}
-			
-
-		}else if (formula==3) {
-			System.out.println("WB-index   WB=m*SSW/SSB   "+methodnameString );
-			int k = 1;
-			for (int i = 0; i < sswArray.length; i++) {
-				Double ssw = (Double) sswArray[i];
-				Double ssb = (Double) ssbArray[i];
-
-				if (ssb != 0 ) {
-					
-				 value = ssw / ssb;
-//				 value = ssw / ssb;
-			
 				} else {
 					value = 0;
 				}
 				Set<Set<String>> slKClustering = dendrogram.partitionK(i + 1);
-				if(i!=0)
-				System.out.println(k+". "+slKClustering + " stop criteria =" + k + "*" + ssw
-						+ "/" + ssb + "= " + value);
+				if (k != 1)
+					System.out.println(k + ". " + slKClustering
+							+ "  stop criteria= [" + ssb + "/(" + k + "-1)]/["
+							+ ssw + "/(" + inputSize + "-" + k + ")]= " + +value);
 				valueList.put(slKClustering, value);
 				scList.add(value);
 				k++;
 			}
-			
-		}else {
-			value=0;
-			
+		} else if (formula == 2) {
+			System.out.println("Hartigan   H=log(SSB/SSW)   "
+					+ methodnameString);
+			for (int i = 0; i < sswArray.length; i++) {
+				Double ssw = (Double) sswArray[i];
+				Double ssb = (Double) ssbArray[i];
+
+				if (ssw != 0) {
+					value = Math.log(ssb / ssw);
+
+				} else {
+					value = 0;
+				}
+				Set<Set<String>> slKClustering = dendrogram.partitionK(i + 1);
+				if (i != 0)
+					System.out.println(i + 1 + ".  " + slKClustering
+							+ "  stop criteria= " + "log(" + ssb + "/" + ssw
+							+ ") =  " + value);
+				valueList.put(slKClustering, value);
+				scList.add(value);
+			}
+		} else if (formula == 3) {
+			System.out.println("WB-index   WB=m*SSW/SSB   " + methodnameString);
+			int k = 1;
+			for (int i = 0; i < sswArray.length; i++) {
+				Double ssw = (Double) sswArray[i];
+				Double ssb = (Double) ssbArray[i];
+
+				if (ssb != 0) {
+
+					value = ssw / ssb;
+					// value = ssw / ssb;
+
+				} else {
+					value = 0;
+				}
+				Set<Set<String>> slKClustering = dendrogram.partitionK(i + 1);
+				if (i != 0)
+					System.out.println(k + ". " + slKClustering
+							+ " stop criteria =" + k + "*" + ssw + "/" + ssb
+							+ "= " + value);
+				valueList.put(slKClustering, value);
+				scList.add(value);
+				k++;
+			}
+		} else {
+			value = 0;
 		}
-		
+
 		int k = 0;
-		for (int i = 0; i < sswArray.length; i++) 
-		{
-			k = i +1;
-			System.out.println(k+" "+scList.get(i)+";");
+		for (int i = 0; i < sswArray.length; i++) {
+			k = i + 1;
+			System.out.println(k + " " + scList.get(i) + ";");
 		}
-		
-		
+
 		return valueList;
 
 	}
 	
 	public List<Double> getSSBList(Set<String> inputSet, String type,
-			int method, String normalized) throws IOException {
+			int method, String normalized, Dendrogram<String> dendrogram) throws IOException {
 //		Clustering_own clustering_own = new Clustering_own();
 //		WordnetSimilarity wordnetSimilarity = new WordnetSimilarity();
 
 		// Dendrogram<String> dendrogram = clustering_own
 		// .single_linkage_clustering(inputSet, type);
 		
-		Dendrogram<String> dendrogram = single_linkage_clustering_method(inputSet, type, method);
+		System.out.println("GETSSBList");
+		System.out.println(dendrogram);
 
 		List<Double> ssb = new ArrayList<Double>();
 		for (int k = 1; k <= dendrogram.size(); ++k) {
@@ -312,15 +316,13 @@ public class Stop_criteria {
 	}
 
 	public List<Double> getSSBListDetail(Set<String> inputSet, String type,
-			int method, String normalized) throws IOException {
+			int method, String normalized, Dendrogram<String> dendrogram) throws IOException {
 //		Clustering_own clustering_own = new Clustering_own();
 //		WordnetSimilarity wordnetSimilarity = new WordnetSimilarity();
 
 		// Dendrogram<String> dendrogram = clustering_own
 		// .single_linkage_clustering(inputSet, type);
 		
-		Dendrogram<String> dendrogram = single_linkage_clustering_method(inputSet, type, method);
-
 		List<Double> ssb = new ArrayList<Double>();
 		for (int k = 1; k <= dendrogram.size(); ++k) {
 			double ssbTotal = 0;
@@ -379,13 +381,11 @@ public class Stop_criteria {
 
 
 	public List<Double> getSSWListDetail(Set<String> inputSet, String type,
-			int method, String normalized) throws IOException {
+			int method, String normalized, Dendrogram<String> dendrogram) throws IOException {
 	
 
 		// Dendrogram<String> dendrogram = clustering_own
 		// .single_linkage_clustering(inputSet, type);
-
-		Dendrogram<String> dendrogram = single_linkage_clustering_method(inputSet, type, method);
 
 		System.out.println("\nSingle Link Clusterings");
 
@@ -438,13 +438,14 @@ public class Stop_criteria {
 	}
 	
 	public List<Double> getSSWList(Set<String> inputSet, String type,
-			int method, String normalized) throws IOException {
+			int method, String normalized, Dendrogram<String> dendrogram) throws IOException {
 	
 
 		// Dendrogram<String> dendrogram = clustering_own
 		// .single_linkage_clustering(inputSet, type);
 
-		Dendrogram<String> dendrogram = single_linkage_clustering_method(inputSet, type, method);
+		System.out.println("GETSSWList");
+		System.out.println(dendrogram);
 
 //		System.out.println("\nSingle Link Clusterings");
 
@@ -527,7 +528,7 @@ public class Stop_criteria {
 
 	}
 	
-	public Dendrogram<String> single_linkage_clustering_method(
+	public Dendrogram<String> singleLinkageClustering(
 			Set<String> elementSet, String type, int method)
 			throws IOException {
 		// Double maxDistance=Double.MAX_VALUE;
