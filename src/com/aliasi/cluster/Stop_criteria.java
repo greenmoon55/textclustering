@@ -1,4 +1,4 @@
-﻿package com.aliasi.cluster;
+package com.aliasi.cluster;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,11 +15,6 @@ import java.util.Set;
 import com.aliasi.cluster.AbstractHierarchicalClusterer.PairScore;
 import com.aliasi.util.ScoredObject;
 
-import edu.sussex.nlp.jws.JiangAndConrath;
-import edu.sussex.nlp.jws.Lin;
-import edu.sussex.nlp.jws.Path;
-import edu.sussex.nlp.jws.WuAndPalmer;
-import fi.uef.cs.StringSimilarity;
 import fi.uef.cs.WordnetSimilarity;
 
 public class Stop_criteria {
@@ -36,12 +31,12 @@ public class Stop_criteria {
 		
 		System.out.println("Please input words list and seperate them by \",\": ");
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		String inputString = in.readLine();
+		//String inputString = in.readLine();
 		
-		// String inputString = "car,orange,bike,bus,apple";
+		//String inputString = "car,orange,bike,bus,apple";
 		// String inputString = "car,orange,bike,bus,apple,dog,cat";
 		//String inputString = "car,orange,bike,bus,apple,dog,cat,pen,pencil";
-//		String inputString = "cafe,restaurant,cafeteria,hotel,hostel,arena,stadium,theater,cinema";
+		String inputString = "cafe,restaurant,cafeteria,hotel,hostel,arena,stadium,theater,cinema";
 		Set<String> inputSet = new HashSet<String>();
 		for (String s : inputString.split(","))
 			inputSet.add(s);
@@ -553,8 +548,8 @@ public class Stop_criteria {
 		// set 容器elementSet 变成数组 elements
 		String[] elements = new String[elementSet.size()];
 		int setToArrayIndex = 0;
-		for (Iterator iterator = elementSet.iterator(); iterator.hasNext();) {
-			elements[setToArrayIndex] = (String) iterator.next();
+		for (Iterator<String> iterator = elementSet.iterator(); iterator.hasNext();) {
+			elements[setToArrayIndex] = iterator.next();
 			setToArrayIndex++;
 		}
 
@@ -674,30 +669,19 @@ public class Stop_criteria {
 	
 	public Double getSimilarity(String word1, String word2, int method, String type){
 		double similarityValue = 0;
-		try {
-			
-
-			
-			
-			//1.Jiang 2.Wu 3.Lin 4.Path 
-			if (method ==1 || method ==2 || method ==3 || method==4) {
-			
-				similarityValue = wSimilarity.getWordnetSimilarity(word1, word2, type, method);
-				if (similarityValue>1){
-					similarityValue=1;
-				}else if (similarityValue<0){
-					similarityValue=0;
-				}
-
-			} else{
-				System.out.println("Sorry, no this method!!!");
-				similarityValue=-1;
-			}
+		//1.Jiang 2.Wu 3.Lin 4.Path 
+		if (method ==1 || method ==2 || method ==3 || method==4) {
 		
-//wordsimilarityValue = wSimilarity.getWordnetSimilarity("cat", "dog", "n");
-		} catch (IOException e) {
-			
-			e.printStackTrace();
+			similarityValue = wSimilarity.getWordnetSimilarity(word1, word2, type, method);
+			if (similarityValue>1){
+				similarityValue=1;
+			}else if (similarityValue<0){
+				similarityValue=0;
+			}
+
+		} else{
+			System.out.println("Sorry, no this method!!!");
+			similarityValue=-1;
 		}
 		java.text.DecimalFormat   df=new   java.text.DecimalFormat("#0.00"); 
 		String similarityValue1 = df.format(similarityValue);
