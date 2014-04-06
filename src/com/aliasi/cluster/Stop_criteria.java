@@ -36,9 +36,9 @@ public class Stop_criteria {
 		
 		System.out.println("Please input words list and seperate them by \",\": ");
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		String inputString = in.readLine();
+		//String inputString = in.readLine();
 		
-		// String inputString = "car,orange,bike,bus,apple";
+		String inputString = "car,orange,bike,bus,apple";
 		// String inputString = "car,orange,bike,bus,apple,dog,cat";
 		//String inputString = "car,orange,bike,bus,apple,dog,cat,pen,pencil";
 //		String inputString = "cafe,restaurant,cafeteria,hotel,hostel,arena,stadium,theater,cinema";
@@ -404,7 +404,7 @@ public class Stop_criteria {
 				if (setSize > 1) {
 					String[] arrayStrings = setToArray(set);
 
-					// µÃµ½ËùÓÐµÄpair µÄdistance£¬ ·Åµ½pairscore µÄlist ÀïÃæ
+					// ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ðµï¿½pair ï¿½ï¿½distanceï¿½ï¿½ ï¿½Åµï¿½pairscore ï¿½ï¿½list ï¿½ï¿½ï¿½ï¿½
 					for (int i = 0; i < arrayStrings.length; i++) {
 						String sI = arrayStrings[i];
 
@@ -470,7 +470,7 @@ public class Stop_criteria {
 				if (setSize > 1) {
 					
 					totaldistance_temp = 0;
-					// µÃµ½ËùÓÐµÄpair µÄdistance£¬ ·Åµ½pairscore µÄlist ÀïÃæ
+					// ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ðµï¿½pair ï¿½ï¿½distanceï¿½ï¿½ ï¿½Åµï¿½pairscore ï¿½ï¿½list ï¿½ï¿½ï¿½ï¿½
 					for (int i = 0; i < arrayStrings.length; i++) {
 						String sI = arrayStrings[i];
 
@@ -526,7 +526,7 @@ public class Stop_criteria {
 
 	public String[] setToArray(Set<String> set) {
 
-		// µ±²ÎÊýÊý×éµÄ³¤¶ÈÐ¡ÓÚlistµÄÔªËØ¸öÊýÊ±£¬»á×Ô¶¯À©³äÊý×éµÄ³¤¶ÈÒÔÊÊÓ¦listµÄ³¤¶È
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½listï¿½ï¿½Ôªï¿½Ø¸ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦listï¿½Ä³ï¿½ï¿½ï¿½
 		String[] strArray = (String[]) set.toArray(new String[0]);
 		return strArray;
 
@@ -537,20 +537,20 @@ public class Stop_criteria {
 			throws IOException {
 		// Double maxDistance=Double.MAX_VALUE;
 
-		// ¿Õ×Ö·û´®µÄÇé¿ö£¬±¨´í
+		// ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (elementSet.size() == 0) {
 			String msg = "Require non-empty set to form dendrogram."
 					+ " Found elementSet.size()=" + elementSet.size();
 			throw new IllegalArgumentException(msg);
 		}
 
-		// ½¨Á¢Ò»¸öLeafDendrogram ¶ÔÏó£¬°üº¬Ò»¸ö¶ÔÏó
+		// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½LeafDendrogram ï¿½ï¿½ï¿½ó£¬°ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (elementSet.size() == 1) {
 			return new LeafDendrogram<String>(elementSet.iterator().next());
 		}
 
 		// Object[] elements = toElements(elementSet);
-		// set ÈÝÆ÷elementSet ±ä³ÉÊý×é elements
+		// set ï¿½ï¿½ï¿½ï¿½elementSet ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ elements
 		String[] elements = new String[elementSet.size()];
 		int setToArrayIndex = 0;
 		for (Iterator iterator = elementSet.iterator(); iterator.hasNext();) {
@@ -565,7 +565,7 @@ public class Stop_criteria {
 
 		//
 
-		// Êý×é elements ±ä³É LeafDendrogramÊý×é array
+		// ï¿½ï¿½ï¿½ï¿½ elements ï¿½ï¿½ï¿½ LeafDendrogramï¿½ï¿½ï¿½ï¿½ array
 		LeafDendrogram<String>[] leafs = (LeafDendrogram<String>[]) new LeafDendrogram[elements.length];
 		for (int i = 0; i < elements.length; i++) {
 			leafs[i] = new LeafDendrogram<String>(elements[i]);
@@ -573,7 +573,7 @@ public class Stop_criteria {
 
 		}
 
-		// LeafDendrogramÊý×é ±ä³É set ÈÝÆ÷ ×°ÂúÏµÍ³Ê÷ÐÎµÄÈÝÆ÷
+		// LeafDendrogramï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ set ï¿½ï¿½ï¿½ï¿½ ×°ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½
 		Set<Dendrogram<String>> clusters = new HashSet<Dendrogram<String>>(
 				elements.length);
 		for (Dendrogram<String> dendrogram : leafs) {
@@ -584,13 +584,13 @@ public class Stop_criteria {
 		 * { System.out.println("the each dendrogram is: "+dendrogram); }
 		 */
 
-		// pairscore ÓÐÒ»¸ö¹¹Ôì·½·¨£¬¶þ¸öDendrogram£¬ ¼ÓÒ»¸öscore
+		// pairscore ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Dendrogramï¿½ï¿½ ï¿½ï¿½Ò»ï¿½ï¿½score
 		ArrayList<PairScore<String>> pairScoreList = new ArrayList<PairScore<String>>();
 		int len = elements.length;
 		double maxDistance = Double.MAX_VALUE;
 	
 
-		// µÃµ½ËùÓÐµÄpair µÄdistance£¬ ·Åµ½pairscore µÄlist ÀïÃæ
+		// ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ðµï¿½pair ï¿½ï¿½distanceï¿½ï¿½ ï¿½Åµï¿½pairscore ï¿½ï¿½list ï¿½ï¿½ï¿½ï¿½
 		for (int i = 0; i < len; ++i) {
 			String sI = elements[i];
 			Dendrogram<String> dendroI = leafs[i];
@@ -618,12 +618,12 @@ public class Stop_criteria {
 		}
 
 		/*
-		 * //´òÓ¡ pairScore ps(chicken,car:50.0) ps(chicken,orange:40.0) for
+		 * //ï¿½ï¿½Ó¡ pairScore ps(chicken,car:50.0) ps(chicken,orange:40.0) for
 		 * (PairScore<String> pairScore : pairScoreList) {
 		 * System.out.println(pairScore); }
 		 */
 
-		// pairscore ´ÓÐ¡µ½´óÅÅÁÐps(car,jeep:0.0) ps(cat,woman:4.76)
+		// pairscore ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ps(car,jeep:0.0) ps(cat,woman:4.76)
 		PairScore<String>[] pairScores = (PairScore<String>[]) new PairScore[pairScoreList
 				.size()];
 		pairScoreList.toArray(pairScores);
@@ -631,7 +631,7 @@ public class Stop_criteria {
 															// of distance
 
 		/*
-		 * //²âÊÔ pairscore ´ÓÐ¡µ½´óÅÅÁÐ
+		 * //ï¿½ï¿½ï¿½ï¿½ pairscore ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		 * 
 		 * System.out.println("\nAfter sort"); for (int i = 0; i <
 		 * pairScores.length; i++) { System.out.println(pairScores[i]); }
@@ -641,7 +641,7 @@ public class Stop_criteria {
 			PairScore<String> ps = pairScores[i];
 			if (ps.score() > Double.MAX_VALUE)
 				break;
-			// ps.mDendrogram1 ÊÇ×é³Éps ÀïµÄµÚÒ»¸öLeafDendrogram dereference ·µ»ØËüµÄparent
+			// ps.mDendrogram1 ï¿½ï¿½ï¿½ï¿½ï¿½ps ï¿½ï¿½Äµï¿½Ò»ï¿½ï¿½LeafDendrogram dereference ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½parent
 			Dendrogram<String> d1 = ps.mDendrogram1.dereference();
 			Dendrogram<String> d2 = ps.mDendrogram2.dereference();
 
@@ -654,8 +654,8 @@ public class Stop_criteria {
 			}
 			clusters.remove(d1);
 			clusters.remove(d2);
-			// °Ñd1£¬ d2 µÄparent ÉèÖÃ³ÉÐÂÉú³ÉµÄ ÓÐ·ÖÖ§µÄÏµÍ³Ê÷ÐÎ dlink£¬ pairScores[i].mScore
-			// ÊÇdistanceÊý×Ö
+			// ï¿½ï¿½d1ï¿½ï¿½ d2 ï¿½ï¿½parent ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½ ï¿½Ð·ï¿½Ö§ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ dlinkï¿½ï¿½ pairScores[i].mScore
+			// ï¿½ï¿½distanceï¿½ï¿½ï¿½ï¿½
 			LinkDendrogram<String> dLink = new LinkDendrogram<String>(d1, d2,
 					pairScores[i].mScore);
 			clusters.add(dLink);
@@ -664,7 +664,7 @@ public class Stop_criteria {
 		// link up remaining unlinked dendros at +infinity distance
 		Iterator<Dendrogram<String>> it = clusters.iterator();
 		Dendrogram<String> dendro = it.next(); // skip first -
-												// self,±»ÅÅºÃµÄÏµÍ³Ê÷ÐÎ¾ÍÒ»¸ö£¬Èç¹û»¹ÓÐ£¬Á¬ºÃµÄºÍÃ»Á¬ºÅµÄÁ¬
+												// self,ï¿½ï¿½ï¿½ÅºÃµï¿½ÏµÍ³ï¿½ï¿½ï¿½Î¾ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ÃµÄºï¿½Ã»ï¿½ï¿½ï¿½Åµï¿½ï¿½ï¿½
 		while (it.hasNext())
 			dendro = new LinkDendrogram<String>(dendro, it.next(),
 					Double.POSITIVE_INFINITY);
@@ -674,30 +674,19 @@ public class Stop_criteria {
 	
 	public Double getSimilarity(String word1, String word2, int method, String type){
 		double similarityValue = 0;
-		try {
-			
-
-			
-			
-			//1.Jiang 2.Wu 3.Lin 4.Path 
-			if (method ==1 || method ==2 || method ==3 || method==4) {
-			
-				similarityValue = wSimilarity.getWordnetSimilarity(word1, word2, type, method);
-				if (similarityValue>1){
-					similarityValue=1;
-				}else if (similarityValue<0){
-					similarityValue=0;
-				}
-
-			} else{
-				System.out.println("Sorry, no this method!!!");
-				similarityValue=-1;
-			}
+		//1.Jiang 2.Wu 3.Lin 4.Path 
+		if (method ==1 || method ==2 || method ==3 || method==4) {
 		
-//wordsimilarityValue = wSimilarity.getWordnetSimilarity("cat", "dog", "n");
-		} catch (IOException e) {
-			
-			e.printStackTrace();
+			similarityValue = wSimilarity.getWordnetSimilarity(word1, word2, type, method);
+			if (similarityValue>1){
+				similarityValue=1;
+			}else if (similarityValue<0){
+				similarityValue=0;
+			}
+
+		} else{
+			System.out.println("Sorry, no this method!!!");
+			similarityValue=-1;
 		}
 		java.text.DecimalFormat   df=new   java.text.DecimalFormat("#0.00"); 
 		String similarityValue1 = df.format(similarityValue);

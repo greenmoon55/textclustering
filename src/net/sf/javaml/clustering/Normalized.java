@@ -6,12 +6,10 @@
  * @author Uyttersprot Bram
  */
 
-package test;
+package net.sf.javaml.clustering;
 import Jama.*;
 
 import java.io.*;
-import net.sf.javaml.clustering.Clusterer;
-import net.sf.javaml.clustering.KMeans;
 import net.sf.javaml.core.Dataset;
 import net.sf.javaml.distance.DistanceMeasure;
 import net.sf.javaml.distance.CosineDistance;

@@ -6,13 +6,11 @@
  * @author Uyttersprot Bram
  */
 
-package test;
+package net.sf.javaml.clustering;
 
 import Jama.*;
 
 import java.io.*;
-import net.sf.javaml.clustering.Clusterer;
-import net.sf.javaml.clustering.KMeans;
 import net.sf.javaml.core.Dataset;
 import net.sf.javaml.distance.DistanceMeasure;
 import net.sf.javaml.distance.CosineDistance;
@@ -66,7 +64,7 @@ public class Unnormalized implements Clusterer {
 					maximum = m.get(i, j);
 			}
 		}
-		/* Calculate similarity matrix and degree matrix */
+		/* Calculate similarity matrix and degree matrix from the above distance matrix */
 		for (int i = 0; i < m.getRowDimension(); i++) {
 			for (int j = 0; j < m.getColumnDimension(); j++) {
 				double temp = Math.abs(maximum - m.get(i, j));
@@ -83,7 +81,7 @@ public class Unnormalized implements Clusterer {
 
 		/* Temporarily saving the eigenvectors to a file test.data */
 		try {
-			FileWriter w = new FileWriter(new File("test.data"));
+			FileWriter w = new FileWriter(new File("test.csv"));
 			/* Write eigenvectors one by one */
 			for (int i = 0; i < V.getRowDimension(); i++) {
 				for (int j = 0; j < V.getColumnDimension(); j++) {
@@ -102,7 +100,7 @@ public class Unnormalized implements Clusterer {
 		 * Process the newly-created file by KMeans algorithm
 		 */
 		try {
-			Dataset dataset = FileHandler.loadDataset(new File("test.data"),
+			Dataset dataset = FileHandler.loadDataset(new File("test.csv"),
 					",");
 			Clusterer km = new KMeans(numberOfClusters);
 			Dataset[] clusters = km.cluster(dataset);

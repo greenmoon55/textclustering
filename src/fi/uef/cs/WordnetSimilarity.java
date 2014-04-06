@@ -1,19 +1,11 @@
 package fi.uef.cs;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
 import java.io.*;
-import java.math.BigDecimal;
 import java.net.URL;
-import java.text.*;
 import edu.sussex.nlp.jws.*;
 import edu.mit.jwi.*;
-import edu.mit.jwi.data.*;
-import edu.mit.jwi.data.compare.*;
-import edu.mit.jwi.data.parse.*;
 import edu.mit.jwi.item.*;
-import edu.mit.jwi.morph.*;
 
 public class WordnetSimilarity {
 
@@ -23,6 +15,11 @@ public class WordnetSimilarity {
 	JWS ws = new JWS(dir, "2.1");
 	WuAndPalmer wup = ws.getWuAndPalmer();
 	JiangAndConrath jiang = ws.getJiangAndConrath();
+	
+	public double getWordnetSimilarity(String word1, String word2, String type,
+			int method) {
+		return getWordnetSimilarity(word1, word2, type, method, false);
+	}
 
 	public double getWordnetSimilarity(String word1, String word2, String type,
 			int method, boolean firstSenseOnly) {

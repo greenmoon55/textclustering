@@ -16,103 +16,124 @@ import java.util.Scanner;
 import net.sf.javaml.clustering.Clusterer;
 import net.sf.javaml.clustering.DensityBasedSpatialClustering;
 import net.sf.javaml.clustering.KMeans;
+import net.sf.javaml.clustering.Normalized;
 import net.sf.javaml.clustering.SOM;
+import net.sf.javaml.clustering.Unnormalized;
 import net.sf.javaml.clustering.evaluation.ClusterEvaluation;
 import net.sf.javaml.clustering.evaluation.SumOfSquaredErrors;
 import net.sf.javaml.clustering.evaluation.SumOfCentroidSimilarities;
 import net.sf.javaml.clustering.evaluation.SumOfAveragePairwiseSimilarities;
 import net.sf.javaml.core.Dataset;
-import net.sf.javaml.core.Instance;
 import net.sf.javaml.tools.data.FileHandler;
 
+public class Main {
 
-public class Main{
+	private static String[] datasets = { "iris.csv", "movement.data", "data.csv" };
+	private static int[] index_classlabels = { 4, -1, -1 }; // index of class labels
+	/*
+	 * In the above array "-1" means that the corresponding dataset (in the
+	 * array 'datasets') no index of the class label was specified.       
+	 * The above two arrays must always have the same number of elements in order to
+	 * guarantee it works properly.
+	 */
 
-    /* Array voor het bijhouden van de mogelijke datasets. */
-    private static String[] datasets = {"iris.csv","movement.data"};
-    /* Array voor het bijhouden van de indices van de classlabels. */
-    private static int[] index_classlabels = {4, -1};
-    /* In bovenstaande array betekent '-1' dat voor de hiermee corresponderende
-     * dataset (in de array 'datasets') geen index van het classlabel werd opgegeven.
-     * De twee bovenvermelde arrays dienen steeds eenzelfde aantal elementen te
-     * bevatten om een correcte werking te kunnen garanderen.
-     */
+	private static String[] algorithms = { "Density Based Spatial Clustering",
+			"K-Means Clustering", "SOM (Self-Organizing Map)",
+			"Normalized Spectral Clustering",
+			"Unnormalized Spectral Clustering" };
+	private static String[] distances = { "Cosine Distance",
+			"Euclidean Distance", "Manhattan Distance", "Norm Distance" };
 
-    /* Array voor het bijhouden van de mogelijke clusteringsalgoritmes. */
-    private static String[] algorithms = {"Density Based Spatial Clustering",
-        "K-Means Clustering", "SOM (Self-Organizing Map)", "Normalized Spectral Clustering",
-        "Unnormalized Spectral Clustering"};
-    /* Array voor het bijhouden van de mogelijke afstandsmaten. */
-    private static String[] distances = {"Cosine Distance", "Euclidean Distance",
-        "Manhattan Distance", "Norm Distance"};
+	public static void main(String[] args) throws Exception {
+		Scanner scan = new Scanner(System.in);
+		String input = "";
 
+		/* Retrieve data */
+		System.out.println("Which dataset do you use?");
+		for (int i = 0; i < datasets.length; i++)
+			System.out.println(i + " : " + datasets[i]);
+		System.out.print("Enter the number of your choice: ");
+		input = scan.nextLine();
 
+		/* Load dataset */
+		Dataset data;
+		if (index_classlabels[Integer.parseInt(input)] < 0) {
+			data = FileHandler.loadDataset(
+					new File(datasets[Integer.parseInt(input)]), ",");
+		} else {
+			data = FileHandler.loadDataset(
+					new File(datasets[Integer.parseInt(input)]),
+					index_classlabels[Integer.parseInt(input)], ",");
+		}
 
-    public static void main(String[] args) throws Exception{
-        /* Inputscanner aanmaken */
-        Scanner scan = new Scanner(System.in);
-        /* String aanmaken om input in bij te houden */
-        String input = "";
+		/* Clustering algorithm selection */
+		System.out.println("Which clustering algorithm would you use?");
+		for (int i = 0; i < algorithms.length; i++)
+			System.out.println(i + " : " + algorithms[i]);
+		System.out.print("Enter the number of your choice: ");
+		int choice = Integer.parseInt(scan.nextLine());
 
-        /* Opvragen van de dataset */
-        System.out.println("Welke dataset wil u gebruiken?");
-        for(int i=0; i < datasets.length; i++)
-            System.out.println(i + " : " + datasets[i]);
-        System.out.print("Geef het nummer van uw keuze in: ");
-        input = scan.nextLine();
+		/*
+		 * When the user selects spectral clustering, additional parameters must
+		 * be set
+		 */
+		int number_of_clusters = 4;
+		if (choice == 3 || choice == 4) {
+			System.out.println("Spectral Clustering algorithms should be invoked "
+					+ "with the desired number of clusters as a parameter.");
+			System.out.print("How many clusters do you want? ");
+			number_of_clusters = Integer.parseInt(scan.nextLine());
+			System.out.println("Finally you need to select the distance measure");
+			for (int i = 0; i < distances.length; i++)
+				System.out.println(i + " : " + distances[i]);
+			System.out.print("Enter the number of your choice: ");
+			input = scan.nextLine();
+		}
 
-        /* Laden van de dataset */
-        Dataset data;
-        if(index_classlabels[Integer.parseInt(input)] < 0){
-             data = FileHandler.loadDataset(new File(datasets[Integer.parseInt(input)]), ",");
-        }else{
-             data = FileHandler.loadDataset(new File(datasets[Integer.parseInt(input)]),index_classlabels[Integer.parseInt(input)],",");
+		Clusterer cl;
+		switch (choice) {
+		case 0:
+			cl = new DensityBasedSpatialClustering();
+			break;
+		case 1:
+			cl = new KMeans();
+			break;
+		case 2:
+			cl = new SOM();
+			break;
+		case 3:
+			cl = new Normalized(number_of_clusters, Integer.parseInt(input));
+			break;
+		case 4:
+			cl = new Unnormalized(number_of_clusters, Integer.parseInt(input));
+			break;
+		default:
+			cl = new KMeans();
+		}
+		
+		for (int i = 0; i < data.size(); i++) {
+        	System.out.println(data.get(i));
         }
 
-        /* Clusteralgoritme selecteren */
-        System.out.println("Welk clusteralgoritme wenst u te gebruiken?");
-        for(int i=0; i < algorithms.length; i++)
-            System.out.println(i + " : " + algorithms[i]);
-        System.out.print("Geef het nummer van uw keuze in: ");
-        int choice = Integer.parseInt(scan.nextLine());
-
-
-        /* Wanneer de gebruiker voor spectrale clustering kiest, moeten bijkomende parameters ingesteld worden.*/
-        int number_of_clusters = 4;
-        if(choice == 3 || choice == 4){
-        System.out.println("Spectrale Clustering algoritmes dienen aangeroepen te worden " +
-                "met het gewenste aantal clusters als parameter.");
-        System.out.print("Hoeveel clusters wenst u te gebruiken? ");
-        number_of_clusters = Integer.parseInt(scan.nextLine());
-        System.out.println("Als laatste moet u de te gebruiken afstandsmaat selecteren.");
-        for(int i=0; i < distances.length; i++)
-            System.out.println(i + " : " + distances[i]);
-        System.out.print("Geef het nummer van uw keuze in: ");
-        input = scan.nextLine();
-        }
-
-        Clusterer cl;
-        switch(choice){
-            case 0: cl = new DensityBasedSpatialClustering(); break;
-            case 1: cl = new KMeans(); break;
-            case 2: cl = new SOM(); break;
-            case 3: cl = new Normalized(number_of_clusters,Integer.parseInt(input)); break;
-            case 4: cl = new Unnormalized(number_of_clusters,Integer.parseInt(input)); break;
-            default:cl = new KMeans();
-        }
-
-        /* Het eigenlijke clusteren van de data */
-        Dataset[] clusters = cl.cluster(data);
-        /* Uitprinten van het gevonden aantal clusters */
-        System.out.println("Aantal clusters: " + clusters.length);
-        /* Aanmaken van object voor het evalueren van de clusters */
-        ClusterEvaluation eval;
-        /* Meten van de kwaliteit van de clusters (verschillende maatstaven) */
-        eval = new SumOfSquaredErrors();
-        System.out.println("Score volgens SumOfSquaredErrors: " + eval.score(clusters));
-        eval = new SumOfCentroidSimilarities();
-        System.out.println("Score volgens SumOfCentroidSimilarities: " + eval.score(clusters));
-        eval = new SumOfAveragePairwiseSimilarities();
-        System.out.println("Score volgens SumOfAveragePairwiseSimilarities: " + eval.score(clusters));
-    }
+		/* The actual clustering of the data */
+		Dataset[] clusters = cl.cluster(data);
+		
+		for (int i = 0; i < clusters.length; i++) {
+			FileHandler.exportDataset(clusters[i],new File("output" + i + ".txt"));
+		}
+		/* Print the number of clusters found */
+		System.out.println("Number of clusters: " + clusters.length);
+		/* Create object for the evaluation of the clusters */
+		ClusterEvaluation eval;
+		/* Measuring the quality of the clusters (multiple measures) */
+		eval = new SumOfSquaredErrors();
+		System.out.println("Score according to SumOfSquaredErrors: "
+				+ eval.score(clusters));
+		eval = new SumOfCentroidSimilarities();
+		System.out.println("Score according to SumOfCentroidSimilarities: "
+				+ eval.score(clusters));
+		eval = new SumOfAveragePairwiseSimilarities();
+		System.out.println("Score according to SumOfAveragePairwiseSimilarities: "
+				+ eval.score(clusters));
+	}
 }
