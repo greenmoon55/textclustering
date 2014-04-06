@@ -1,4 +1,4 @@
-package com.aliasi.cluster;
+﻿package com.aliasi.cluster;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,9 +36,9 @@ public class Stop_criteria {
 		
 		System.out.println("Please input words list and seperate them by \",\": ");
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		//String inputString = in.readLine();
+		String inputString = in.readLine();
 		
-		String inputString = "car,orange,bike,bus,apple";
+		// String inputString = "car,orange,bike,bus,apple";
 		// String inputString = "car,orange,bike,bus,apple,dog,cat";
 		//String inputString = "car,orange,bike,bus,apple,dog,cat,pen,pencil";
 //		String inputString = "cafe,restaurant,cafeteria,hotel,hostel,arena,stadium,theater,cinema";
@@ -404,7 +404,7 @@ public class Stop_criteria {
 				if (setSize > 1) {
 					String[] arrayStrings = setToArray(set);
 
-					// �õ����е�pair ��distance�� �ŵ�pairscore ��list ����
+					// 得到所有的pair 的distance， 放到pairscore 的list 里面
 					for (int i = 0; i < arrayStrings.length; i++) {
 						String sI = arrayStrings[i];
 
@@ -470,7 +470,7 @@ public class Stop_criteria {
 				if (setSize > 1) {
 					
 					totaldistance_temp = 0;
-					// �õ����е�pair ��distance�� �ŵ�pairscore ��list ����
+					// 得到所有的pair 的distance， 放到pairscore 的list 里面
 					for (int i = 0; i < arrayStrings.length; i++) {
 						String sI = arrayStrings[i];
 
@@ -526,7 +526,7 @@ public class Stop_criteria {
 
 	public String[] setToArray(Set<String> set) {
 
-		// ����������ĳ���С��list��Ԫ�ظ���ʱ�����Զ���������ĳ�������Ӧlist�ĳ���
+		// 当参数数组的长度小于list的元素个数时，会自动扩充数组的长度以适应list的长度
 		String[] strArray = (String[]) set.toArray(new String[0]);
 		return strArray;
 
@@ -537,20 +537,20 @@ public class Stop_criteria {
 			throws IOException {
 		// Double maxDistance=Double.MAX_VALUE;
 
-		// ���ַ�����������
+		// 空字符串的情况，报错
 		if (elementSet.size() == 0) {
 			String msg = "Require non-empty set to form dendrogram."
 					+ " Found elementSet.size()=" + elementSet.size();
 			throw new IllegalArgumentException(msg);
 		}
 
-		// ����һ��LeafDendrogram ���󣬰�һ������
+		// 建立一个LeafDendrogram 对象，包含一个对象
 		if (elementSet.size() == 1) {
 			return new LeafDendrogram<String>(elementSet.iterator().next());
 		}
 
 		// Object[] elements = toElements(elementSet);
-		// set ����elementSet ������� elements
+		// set 容器elementSet 变成数组 elements
 		String[] elements = new String[elementSet.size()];
 		int setToArrayIndex = 0;
 		for (Iterator iterator = elementSet.iterator(); iterator.hasNext();) {
@@ -565,7 +565,7 @@ public class Stop_criteria {
 
 		//
 
-		// ���� elements ��� LeafDendrogram���� array
+		// 数组 elements 变成 LeafDendrogram数组 array
 		LeafDendrogram<String>[] leafs = (LeafDendrogram<String>[]) new LeafDendrogram[elements.length];
 		for (int i = 0; i < elements.length; i++) {
 			leafs[i] = new LeafDendrogram<String>(elements[i]);
@@ -573,7 +573,7 @@ public class Stop_criteria {
 
 		}
 
-		// LeafDendrogram���� ��� set ���� װ��ϵͳ���ε�����
+		// LeafDendrogram数组 变成 set 容器 装满系统树形的容器
 		Set<Dendrogram<String>> clusters = new HashSet<Dendrogram<String>>(
 				elements.length);
 		for (Dendrogram<String> dendrogram : leafs) {
@@ -584,13 +584,13 @@ public class Stop_criteria {
 		 * { System.out.println("the each dendrogram is: "+dendrogram); }
 		 */
 
-		// pairscore ��һ�����췽��������Dendrogram�� ��һ��score
+		// pairscore 有一个构造方法，二个Dendrogram， 加一个score
 		ArrayList<PairScore<String>> pairScoreList = new ArrayList<PairScore<String>>();
 		int len = elements.length;
 		double maxDistance = Double.MAX_VALUE;
 	
 
-		// �õ����е�pair ��distance�� �ŵ�pairscore ��list ����
+		// 得到所有的pair 的distance， 放到pairscore 的list 里面
 		for (int i = 0; i < len; ++i) {
 			String sI = elements[i];
 			Dendrogram<String> dendroI = leafs[i];
@@ -618,12 +618,12 @@ public class Stop_criteria {
 		}
 
 		/*
-		 * //��ӡ pairScore ps(chicken,car:50.0) ps(chicken,orange:40.0) for
+		 * //打印 pairScore ps(chicken,car:50.0) ps(chicken,orange:40.0) for
 		 * (PairScore<String> pairScore : pairScoreList) {
 		 * System.out.println(pairScore); }
 		 */
 
-		// pairscore ��С��������ps(car,jeep:0.0) ps(cat,woman:4.76)
+		// pairscore 从小到大排列ps(car,jeep:0.0) ps(cat,woman:4.76)
 		PairScore<String>[] pairScores = (PairScore<String>[]) new PairScore[pairScoreList
 				.size()];
 		pairScoreList.toArray(pairScores);
@@ -631,7 +631,7 @@ public class Stop_criteria {
 															// of distance
 
 		/*
-		 * //���� pairscore ��С��������
+		 * //测试 pairscore 从小到大排列
 		 * 
 		 * System.out.println("\nAfter sort"); for (int i = 0; i <
 		 * pairScores.length; i++) { System.out.println(pairScores[i]); }
@@ -641,7 +641,7 @@ public class Stop_criteria {
 			PairScore<String> ps = pairScores[i];
 			if (ps.score() > Double.MAX_VALUE)
 				break;
-			// ps.mDendrogram1 �����ps ��ĵ�һ��LeafDendrogram dereference �������parent
+			// ps.mDendrogram1 是组成ps 里的第一个LeafDendrogram dereference 返回它的parent
 			Dendrogram<String> d1 = ps.mDendrogram1.dereference();
 			Dendrogram<String> d2 = ps.mDendrogram2.dereference();
 
@@ -654,8 +654,8 @@ public class Stop_criteria {
 			}
 			clusters.remove(d1);
 			clusters.remove(d2);
-			// ��d1�� d2 ��parent ���ó�����ɵ� �з�֧��ϵͳ���� dlink�� pairScores[i].mScore
-			// ��distance����
+			// 把d1， d2 的parent 设置成新生成的 有分支的系统树形 dlink， pairScores[i].mScore
+			// 是distance数字
 			LinkDendrogram<String> dLink = new LinkDendrogram<String>(d1, d2,
 					pairScores[i].mScore);
 			clusters.add(dLink);
@@ -664,7 +664,7 @@ public class Stop_criteria {
 		// link up remaining unlinked dendros at +infinity distance
 		Iterator<Dendrogram<String>> it = clusters.iterator();
 		Dendrogram<String> dendro = it.next(); // skip first -
-												// self,���źõ�ϵͳ���ξ�һ��������У����õĺ�û���ŵ���
+												// self,被排好的系统树形就一个，如果还有，连好的和没连号的连
 		while (it.hasNext())
 			dendro = new LinkDendrogram<String>(dendro, it.next(),
 					Double.POSITIVE_INFINITY);
@@ -674,19 +674,30 @@ public class Stop_criteria {
 	
 	public Double getSimilarity(String word1, String word2, int method, String type){
 		double similarityValue = 0;
-		//1.Jiang 2.Wu 3.Lin 4.Path 
-		if (method ==1 || method ==2 || method ==3 || method==4) {
-		
-			similarityValue = wSimilarity.getWordnetSimilarity(word1, word2, type, method);
-			if (similarityValue>1){
-				similarityValue=1;
-			}else if (similarityValue<0){
-				similarityValue=0;
-			}
+		try {
+			
 
-		} else{
-			System.out.println("Sorry, no this method!!!");
-			similarityValue=-1;
+			
+			
+			//1.Jiang 2.Wu 3.Lin 4.Path 
+			if (method ==1 || method ==2 || method ==3 || method==4) {
+			
+				similarityValue = wSimilarity.getWordnetSimilarity(word1, word2, type, method);
+				if (similarityValue>1){
+					similarityValue=1;
+				}else if (similarityValue<0){
+					similarityValue=0;
+				}
+
+			} else{
+				System.out.println("Sorry, no this method!!!");
+				similarityValue=-1;
+			}
+		
+//wordsimilarityValue = wSimilarity.getWordnetSimilarity("cat", "dog", "n");
+		} catch (IOException e) {
+			
+			e.printStackTrace();
 		}
 		java.text.DecimalFormat   df=new   java.text.DecimalFormat("#0.00"); 
 		String similarityValue1 = df.format(similarityValue);
