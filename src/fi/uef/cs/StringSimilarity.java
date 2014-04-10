@@ -9,33 +9,30 @@ import uk.ac.shef.wit.simmetrics.similaritymetrics.Levenshtein;
 import uk.ac.shef.wit.simmetrics.similaritymetrics.QGramsDistance;
 
 public class StringSimilarity {
-	AbstractStringMetric metric;
-	float result;
-	float resultfinal;
-
-	// 5. Levenshtein 6. q-grams 7. cosin 8. dice
-	public float getStringSimilarity(String word1, String word2, String type,
-			int method) throws IOException {
-
-		if (method == 5) {
+	
+	public static float getStringSimilarity(String word1, String word2, SimilarityMetric.Method method) throws IOException {
+		AbstractStringMetric metric;
+		float result;
+		
+		if (method == SimilarityMetric.Method.Levenshtein) {
 			metric = new Levenshtein();
 			result = metric.getSimilarity(word1, word2);
 			return result;
 
-		} else if (method == 6) {
+		} else if (method == SimilarityMetric.Method.QGrams) {
 			metric = new QGramsDistance();
 			result = metric.getSimilarity(word1, word2);
 			return result;
 
-		} else if (method == 7) {
+		} else if (method == SimilarityMetric.Method.Cosine) {
 			metric = new CosineSimilarity();
 			result = metric.getSimilarity(word1, word2);
 			return result;
 
-		} else if (method == 8) {
+		} else if (method == SimilarityMetric.Method.Dice) {
 			metric = new DiceSimilarity();
 			result = metric.getSimilarity(word1, word2);
-			resultfinal = ((int) (result * 100)) / 100;
+			//resultfinal = ((int) (result * 100)) / 100;
 			return result;
 
 		} else {

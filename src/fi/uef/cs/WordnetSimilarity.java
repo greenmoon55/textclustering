@@ -17,12 +17,12 @@ public class WordnetSimilarity {
 	JiangAndConrath jiang = ws.getJiangAndConrath();
 	
 	public double getWordnetSimilarity(String word1, String word2, String type,
-			int method) {
+			SimilarityMetric.Method method) {
 		return getWordnetSimilarity(word1, word2, type, method, false);
 	}
 
 	public double getWordnetSimilarity(String word1, String word2, String type,
-			int method, boolean firstSenseOnly) {
+			SimilarityMetric.Method method, boolean firstSenseOnly) {
 		// 1 Jiang
 		JiangAndConrath jiang = ws.getJiangAndConrath();
 		// 2 Wu
@@ -33,23 +33,23 @@ public class WordnetSimilarity {
 		Path path = ws.getPath();
 		double similarityValue = -1;
 		if (firstSenseOnly) {
-			if (method == 1) {
+			if (method == SimilarityMetric.Method.Jiang) {
 				similarityValue = jiang.jcn(word1, 1, word2, 1, type);
-			} else if (method == 2) {
+			} else if (method == SimilarityMetric.Method.Wu) {
 				similarityValue = wup.wup(word1, 1, word2, 1, type);
-			} else if (method == 3) {
+			} else if (method == SimilarityMetric.Method.Lin) {
 				similarityValue = lin.lin(word1, 1, word2, 1, type);
-			} else if (method == 4) {
+			} else if (method == SimilarityMetric.Method.Path) {
 				similarityValue = path.path(word1, 1, word2, 1, type);
 			}
 		} else {
-			if (method == 1) {
+			if (method == SimilarityMetric.Method.Jiang) {
 				similarityValue = jiang.max(word1, word2, type);
-			} else if (method == 2) {
+			} else if (method == SimilarityMetric.Method.Wu) {
 				similarityValue = wu.max(word1, word2, type);
-			} else if (method == 3) {
+			} else if (method == SimilarityMetric.Method.Lin) {
 				similarityValue = lin.max(word1, word2, type);
-			} else if (method == 4) {
+			} else if (method == SimilarityMetric.Method.Path) {
 				similarityValue = path.max(word1, word2, type);
 			} else {
 				similarityValue = -1;

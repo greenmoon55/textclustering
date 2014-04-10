@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 
 public class SimilarityMetric {
 	public enum Method {
-		Jiang, Wu, Lin, Path
+		Jiang, Wu, Lin, Path, Levenshtein, QGrams, Cosine, Dice
 	}
 	
 	private static WordnetSimilarity wSimilarity = new WordnetSimilarity();
@@ -34,17 +34,48 @@ public class SimilarityMetric {
 		System.out.println("Please input the number of similarity method: ");
 		in = new BufferedReader(new InputStreamReader(System.in));
 		String methodTemp = in.readLine();
-		int method=Integer.parseInt(methodTemp);
+		int methodNumber = Integer.parseInt(methodTemp);
 		
-		String type=null;
-		if (method ==1 || method ==2 || method ==3 || method==4) {
+		String type = null;
+		if (methodNumber == 1 || methodNumber == 2 || methodNumber == 3 || methodNumber == 4) {
 			System.out.println("Please input word type noun or verb n/v: ");
 			in = new BufferedReader(new InputStreamReader(System.in));
-		    type= in.readLine();
-			
-		} 
+			type = in.readLine();
+		}
 		
-		String similariString = getSimilarity(word1, word2, method, type);
+		Method method = null;
+		switch (methodNumber) {
+		case 1:
+			method = Method.Jiang;
+			break;
+		case 2:
+			method = Method.Wu;
+			break;
+		case 3:
+			method = Method.Lin;
+			break;
+		case 4:
+			method = Method.Path;
+			break;
+		case 5:
+			method = Method.Levenshtein;
+			break;
+		case 6:
+			method = Method.QGrams;
+			break;
+		case 7:
+			method = Method.Cosine;
+			break;
+		case 8:
+			method = Method.Dice;
+			break;
+		default:
+			return;
+		}
+		
+		SimilarityMetric similarityMetric = new SimilarityMetric();
+		
+		String similariString = similarityMetric.getSimilarity(word1, word2, method, type);
 		System.out.println("The similarity of "+word1 +" and " +word2+" is: "+similariString);
 		
 	}
@@ -56,38 +87,10 @@ public class SimilarityMetric {
 	 * @param type 1.Jiang 2.Wu 3.Lin 4.Path 5.Levenshtein 6. q-grams 7. cosin 8. dice
 	 * @return similarity compared with all senses of the two words
 	 */
-	public static String getSimilarity(String word1, String word2, int method, String type){
+	public String getSimilarity(String word1, String word2, SimilarityMetric.Method method, String type){
 		return getSimilarity(word1, word2, method, type, false);
 	}
-	
-	public static double getSimilarityDouble(String word1, String word2, int method, String type){
-		double similarityValue = 0;
-		try {
-			if (method == 1 || method == 2 || method == 3 || method == 4) {
-				similarityValue = wSimilarity.getWordnetSimilarity(word1,
-						word2, type, method, false);
-				if (similarityValue > 1) {
-					similarityValue = 1;
-				} else if (similarityValue < 0) {
-					similarityValue = 0;
-				}
-
-			} else if (method == 5 || method == 6 || method == 7 || method == 8) {
-				StringSimilarity stringSimilarity = new StringSimilarity();
-				similarityValue = stringSimilarity.getStringSimilarity(word1,
-						word2, type, method);
-
-			} else {
-				System.out.println("Sorry, this method doesn't exist!");
-				similarityValue = -1;
-			}
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		}
-		return similarityValue;
-	}
-	
+		
 	/**
 	 * @param word1
 	 * @param word2
@@ -96,11 +99,11 @@ public class SimilarityMetric {
 	 * @param firstSenseOnly
 	 * @return
 	 */
-	public static String getSimilarity(String word1, String word2,
-			int method, String type, boolean firstSenseOnly) {
+	public String getSimilarity(String word1, String word2,
+			SimilarityMetric.Method method, String type, boolean firstSenseOnly) {
 		double similarityValue = 0;
 		try {
-			if (method == 1 || method == 2 || method == 3 || method == 4) {
+			if (method == Method.Jiang || method == Method.Wu || method == Method.Lin || method == Method.Path) {
 				similarityValue = wSimilarity.getWordnetSimilarity(word1,
 						word2, type, method, firstSenseOnly);
 				if (similarityValue > 1) {
@@ -109,17 +112,16 @@ public class SimilarityMetric {
 					similarityValue = 0;
 				}
 
-			} else if (method == 5 || method == 6 || method == 7 || method == 8) {
-				StringSimilarity stringSimilarity = new StringSimilarity();
-				similarityValue = stringSimilarity.getStringSimilarity(word1,
-						word2, type, method);
+			} else if (method == Method.Levenshtein || method == Method.QGrams
+					|| method == Method.Cosine || method == Method.Dice) {
+				similarityValue = StringSimilarity.getStringSimilarity(word1,
+						word2, method);
 
 			} else {
 				System.out.println("Sorry, this method doesn't exist!");
 				similarityValue = -1;
 			}
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
