@@ -5,7 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 
-public class SimilariyMetric {
+public class SimilarityMetric {
+	public enum Method {
+		Jiang, Wu, Lin, Path
+	}
+	
+	private static WordnetSimilarity wSimilarity = new WordnetSimilarity();
 
 	/**
 	 * @param args
@@ -55,6 +60,34 @@ public class SimilariyMetric {
 		return getSimilarity(word1, word2, method, type, false);
 	}
 	
+	public static double getSimilarityDouble(String word1, String word2, int method, String type){
+		double similarityValue = 0;
+		try {
+			if (method == 1 || method == 2 || method == 3 || method == 4) {
+				similarityValue = wSimilarity.getWordnetSimilarity(word1,
+						word2, type, method, false);
+				if (similarityValue > 1) {
+					similarityValue = 1;
+				} else if (similarityValue < 0) {
+					similarityValue = 0;
+				}
+
+			} else if (method == 5 || method == 6 || method == 7 || method == 8) {
+				StringSimilarity stringSimilarity = new StringSimilarity();
+				similarityValue = stringSimilarity.getStringSimilarity(word1,
+						word2, type, method);
+
+			} else {
+				System.out.println("Sorry, this method doesn't exist!");
+				similarityValue = -1;
+			}
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		return similarityValue;
+	}
+	
 	/**
 	 * @param word1
 	 * @param word2
@@ -68,7 +101,6 @@ public class SimilariyMetric {
 		double similarityValue = 0;
 		try {
 			if (method == 1 || method == 2 || method == 3 || method == 4) {
-				WordnetSimilarity wSimilarity = new WordnetSimilarity();
 				similarityValue = wSimilarity.getWordnetSimilarity(word1,
 						word2, type, method, firstSenseOnly);
 				if (similarityValue > 1) {

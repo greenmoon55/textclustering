@@ -439,33 +439,19 @@ public class Stop_criteria {
 	
 	public List<Double> getSSWList(Set<String> inputSet, String type,
 			int method, String normalized, Dendrogram<String> dendrogram) throws IOException {
-	
-
-		// Dendrogram<String> dendrogram = clustering_own
-		// .single_linkage_clustering(inputSet, type);
-
-		System.out.println("GETSSWList");
-		System.out.println(dendrogram);
-
-//		System.out.println("\nSingle Link Clusterings");
 
 		List<Double> ssw = new ArrayList<Double>();
 		for (int k = 1; k <= dendrogram.size(); ++k) {
-			double totaldistance = 0;
-			double totaldistance_temp = 0;
 			Set<Set<String>> slKClustering = dendrogram.partitionK(k);
 			int normalizationFactor = 0;
 			double maxdistanceAll = 0;
 			int numSingleObject = 0;
 			for (Set<String> set : slKClustering) {
 				int setSize = set.size();
-//				normalizationFactor = 0;
 				double maxdistance = 0;
 				double distanceIJ;
 				String[] arrayStrings = setToArray(set);
 				if (setSize > 1) {
-					
-					totaldistance_temp = 0;
 					// 得到所有的pair 的distance， 放到pairscore 的list 里面
 					for (int i = 0; i < arrayStrings.length; i++) {
 						String sI = arrayStrings[i];
@@ -476,13 +462,13 @@ public class Stop_criteria {
 							// wordnetSimilarity.getWordnetSimilarityAll(sI,
 							// sJ,type);
 							double similarityValue = getSimilarity(sI, sJ, method, type); 
-							distanceIJ=(1- similarityValue);
+							distanceIJ= 1 - similarityValue;
 //							System.out.println(sI + "  " + sJ
 //									+ " the distance is: " + distanceIJ);
 //							totaldistance += distanceIJ;
-							if ( distanceIJ > maxdistance )
+							if (distanceIJ > maxdistance) {
 								maxdistance = distanceIJ;
-							
+							}
 							
 						}
 					}
@@ -491,14 +477,11 @@ public class Stop_criteria {
 //					totaldistance_temp /= normalizationFactor;
 //					totaldistance += totaldistance_temp;
 				} else {
-					totaldistance += 0;
 					numSingleObject += 1/arrayStrings.length;
 				}
 				
-				if ( maxdistance > maxdistanceAll)
-					maxdistanceAll = maxdistance;
-				totaldistance += maxdistance;
-				
+				if (maxdistance > maxdistanceAll)
+					maxdistanceAll = maxdistance;				
 			}
 			
 //			if ((normalized.trim().equalsIgnoreCase("y")) && (normalizationFactor != 0) )
