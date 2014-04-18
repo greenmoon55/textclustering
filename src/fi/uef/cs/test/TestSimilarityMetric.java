@@ -1,9 +1,10 @@
-package fi.uef.cs;
+package fi.uef.cs.test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import fi.uef.cs.SimilarityMetric;
 import fi.uef.cs.SimilarityMetric.Method;
 
 public class TestSimilarityMetric {
