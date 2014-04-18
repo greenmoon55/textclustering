@@ -1,5 +1,7 @@
 package fi.uef.cs;
 
+import java.util.*;
+
 public class ShortTextSimilarity {
 	private SimilarityMetric similarityMetric = new SimilarityMetric();
 	
@@ -13,7 +15,7 @@ public class ShortTextSimilarity {
 		}
 	}
 	
-	private double getMaxSimilarity(String word, String[] wordArray,
+	private double getMaxSimilarity(String word, List<String> wordArray,
 			SimilarityMetric.Method method, String type, boolean firstSenseOnly) {
 		double maxSimilarity = 0;
 		for (String w : wordArray) {
@@ -23,10 +25,10 @@ public class ShortTextSimilarity {
 		return maxSimilarity;
 	}
 
-	public double getSimilarity(String[] wordArray1, String[] wordArray2,
+	public double getSimilarity(List<String> wordArray1, List<String> wordArray2,
 			SimilarityMetric.Method method, String type, boolean firstSenseOnly) {
-		if (wordArray1.length < wordArray2.length) {
-			String[] temp = wordArray1;
+		if (wordArray1.size() < wordArray2.size()) {
+			List<String> temp = wordArray1;
 			wordArray1 = wordArray2;
 			wordArray2 = temp;
 		}
@@ -35,9 +37,19 @@ public class ShortTextSimilarity {
 			result += getMaxSimilarity(word, wordArray2, method, type,
 					firstSenseOnly);
 		}
-		return result/wordArray1.length;
+		return result/wordArray1.size();
 	}
 	
-	
+	public List<HashMap<List<List<String>>, Double>> HierachicalClustering(ArrayList<List<String>> data, SimilarityMetric.Method method) {
+		double[][] similarityMatrix = new double[data.size()][data.size()];
+		for (int i = 0; i < data.size(); i++) {
+			for (int j = i + 1; j < data.size(); j++) {
+				similarityMatrix[i][j] = similarityMatrix[j][i] = getSimilarity(data.get(i), data.get(j), method, "n", false);
+			}
+		}
+		
+		System.out.println("");
+		return null;
+	}
 	
 }
