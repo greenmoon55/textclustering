@@ -15,6 +15,7 @@ import java.util.Set;
 import com.aliasi.cluster.AbstractHierarchicalClusterer.PairScore;
 import com.aliasi.util.ScoredObject;
 
+import fi.uef.cs.SimilarityMetric;
 import fi.uef.cs.WordnetSimilarity;
 
 public class Stop_criteria {
@@ -656,7 +657,7 @@ public class Stop_criteria {
 		//1.Jiang 2.Wu 3.Lin 4.Path 
 		if (method ==1 || method ==2 || method ==3 || method==4) {
 		
-			similarityValue = wSimilarity.getWordnetSimilarity(word1, word2, type, method);
+			similarityValue = wSimilarity.getWordnetSimilarity(word1, word2, type, SimilarityMetric.Method.Jiang);
 			if (similarityValue>1){
 				similarityValue=1;
 			}else if (similarityValue<0){
