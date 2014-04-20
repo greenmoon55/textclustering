@@ -171,7 +171,7 @@ public class ShortTextSimilarity {
 					Double.POSITIVE_INFINITY);
 		}
 		
-		for (int i = 0; i < 55; i++) {
+		for (int i = 0; i < 88; i++) {
 			Set<Set<List<String>>> partitions = dendro.partitionK(i + 1);
 			System.out.println(" ");
 			System.out.println(i + " clusters");

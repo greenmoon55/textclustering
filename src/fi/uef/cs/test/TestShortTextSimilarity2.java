@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 import fi.uef.cs.ShortTextSimilarity;
 import fi.uef.cs.SimilarityMetric;
+import fi.uef.cs.UnnormalizedSpectralClustering;
 
 public class TestShortTextSimilarity2 {
 
@@ -24,7 +25,9 @@ public class TestShortTextSimilarity2 {
 			data.add(Arrays.asList(in.nextLine().split(",")));
 		}
 		
-		shortTextSimilarity.HierachicalClustering(data, SimilarityMetric.Method.Jiang);
+		//shortTextSimilarity.HierachicalClustering(data, SimilarityMetric.Method.Jiang);
+		UnnormalizedSpectralClustering spectralClustering = new UnnormalizedSpectralClustering(25);
+		spectralClustering.cluster(data, SimilarityMetric.Method.Jiang);
 	}
 
 }

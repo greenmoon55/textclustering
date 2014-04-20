@@ -119,7 +119,7 @@ public class Main {
 		Dataset[] clusters = cl.cluster(data);
 		
 		for (int i = 0; i < clusters.length; i++) {
-			FileHandler.exportDataset(clusters[i],new File("output" + i + ".txt"));
+			FileHandler.exportDataset(clusters[i], new File("output" + i + ".txt"));
 		}
 		/* Print the number of clusters found */
 		System.out.println("Number of clusters: " + clusters.length);

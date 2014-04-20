@@ -163,6 +163,7 @@ public class KMeans implements Clusterer {
         boolean randomCentroids = true;
         while (randomCentroids || (iterationCount < this.numberOfIterations && centroidsChanged)) {
             iterationCount++;
+            System.out.println("iteration " + iterationCount);
             // Assign each object to the group that has the closest centroid.
             int[] assignment = new int[data.size()];
             for (int i = 0; i < data.size(); i++) {
@@ -218,7 +219,7 @@ public class KMeans implements Clusterer {
                 }
 
             }
-
+            randomCentroids = false; //temp
         }
         Dataset[] output = new Dataset[centroids.length];
         for (int i = 0; i < centroids.length; i++)
