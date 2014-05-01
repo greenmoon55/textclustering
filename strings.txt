@@ -1,0 +1,5 @@
+﻿car
+orange
+bike
+bus
+apple
