@@ -28,7 +28,7 @@ public class ShortTextSimilarity {
 		return maxSimilarity;
 	}
 
-	private double getSimilarity(List<String> wordArray1, List<String> wordArray2,
+	public double getSimilarity(List<String> wordArray1, List<String> wordArray2,
 			SimilarityMetric.Method method, String type, boolean firstSenseOnly) {
 		if (wordArray1.size() < wordArray2.size()) {
 			List<String> temp = wordArray1;
