@@ -31,12 +31,14 @@ public class UnnormalizedSpectralClustering {
 		numberOfClusters = number;
 	}
 
-	public Dataset[] cluster(ArrayList<List<String>> data, SimilarityMetric.Method method, double[][] similarityMatrix) {
+	public Dataset[] cluster(ArrayList<List<String>> data, SimilarityMetric.Method method) {
 		/* Create required matrices */
 		Matrix m = new Matrix(data.size(), data.size());
 		Matrix d = new Matrix(data.size(), data.size());
 
 		ShortTextSimilarity similarity = new ShortTextSimilarity();
+		
+		double[][] similarityMatrix = similarity.getSimilarityMatrix(data, method);
 		
 //		/* Create distance matrix (or weight matrix) */
 //		for (int i = 0; i < m.getRowDimension(); i++) {

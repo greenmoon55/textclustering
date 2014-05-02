@@ -55,7 +55,7 @@ public class ShortTextSimilarity {
 		return HierachicalClustering.getDendrogram(data, method, similarityMatrix);
 	}
 	
-	public Dendrogram<List<String>> getDendrogramForStringList(ArrayList<List<String>> data, SimilarityMetric.Method method) {
+	public double[][] getSimilarityMatrix(ArrayList<List<String>> data, SimilarityMetric.Method method) {
 		double[][] similarityMatrix = new double[data.size()][data.size()];
 		for (int i = 0; i < data.size(); i++) {
 			for (int j = i + 1; j < data.size(); j++) {
@@ -63,6 +63,11 @@ public class ShortTextSimilarity {
 						data.get(i), data.get(j), method, "n", false);
 			}
 		}
+		return similarityMatrix;
+	}
+	
+	public Dendrogram<List<String>> getDendrogramForStringList(ArrayList<List<String>> data, SimilarityMetric.Method method) {
+		double[][] similarityMatrix = getSimilarityMatrix(data, method);
 		return HierachicalClustering.getDendrogram(data, method, similarityMatrix);
 	}
 	
