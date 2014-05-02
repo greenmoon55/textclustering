@@ -3,10 +3,7 @@ package fi.uef.cs;
 import java.util.*;
 
 import com.aliasi.cluster.Dendrogram;
-import com.aliasi.cluster.LeafDendrogram;
-import com.aliasi.cluster.LinkDendrogram;
 import com.aliasi.util.Scored;
-import com.aliasi.util.ScoredObject;
 
 public class ShortTextSimilarity {
 	private SimilarityMetric similarityMetric = new SimilarityMetric();

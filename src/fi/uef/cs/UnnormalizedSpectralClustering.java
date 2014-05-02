@@ -31,7 +31,7 @@ public class UnnormalizedSpectralClustering {
 		numberOfClusters = number;
 	}
 
-	public Dataset[] cluster(ArrayList<List<String>> data, SimilarityMetric.Method method) {
+	public Dataset[] cluster(ArrayList<List<String>> data, SimilarityMetric.Method method, double[][] similarityMatrix) {
 		/* Create required matrices */
 		Matrix m = new Matrix(data.size(), data.size());
 		Matrix d = new Matrix(data.size(), data.size());
@@ -58,7 +58,7 @@ public class UnnormalizedSpectralClustering {
 		/* Calculate similarity matrix and degree matrix from the above distance matrix */
 		for (int i = 0; i < m.getRowDimension(); i++) {
 			for (int j = 0; j < m.getColumnDimension(); j++) {
-				double temp = similarity.getSimilarity(data.get(i), data.get(j), method, "n", false);
+				double temp = similarityMatrix[i][j];
 				m.set(i, j, temp);
 				d.set(i, i, d.get(i, i) + temp);
 			}

@@ -13,13 +13,13 @@ import fi.uef.cs.ShortTextSimilarity;
 import fi.uef.cs.SimilarityMetric;
 import fi.uef.cs.UnnormalizedSpectralClustering;
 
-public class TestShortTextSimilarity2 {
+public class TestSpectralClustering {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
 		ShortTextSimilarity shortTextSimilarity = new ShortTextSimilarity();
 		
-		Scanner in = new Scanner(new FileReader("data-no-duplicates.txt"));
+		Scanner in = new Scanner(new FileReader("stringlists.txt"));
 		ArrayList<List<String>> data = new ArrayList<List<String>>();
 		while (in.hasNext()) {
 			data.add(Arrays.asList(in.nextLine().split(",")));
