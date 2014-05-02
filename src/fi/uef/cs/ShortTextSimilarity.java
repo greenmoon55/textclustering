@@ -3,10 +3,7 @@ package fi.uef.cs;
 import java.util.*;
 
 import com.aliasi.cluster.Dendrogram;
-import com.aliasi.cluster.LeafDendrogram;
-import com.aliasi.cluster.LinkDendrogram;
 import com.aliasi.util.Scored;
-import com.aliasi.util.ScoredObject;
 
 public class ShortTextSimilarity {
 	private SimilarityMetric similarityMetric = new SimilarityMetric();
@@ -31,7 +28,7 @@ public class ShortTextSimilarity {
 		return maxSimilarity;
 	}
 
-	private double getSimilarity(List<String> wordArray1, List<String> wordArray2,
+	public double getSimilarity(List<String> wordArray1, List<String> wordArray2,
 			SimilarityMetric.Method method, String type, boolean firstSenseOnly) {
 		if (wordArray1.size() < wordArray2.size()) {
 			List<String> temp = wordArray1;
