@@ -109,7 +109,7 @@ public class HierachicalClustering {
 	}
 	
 	public List<Double> getSSWListForString(Set<String> inputSet, String type,
-			SimilarityMetric.Method method, String normalized, Dendrogram<String> dendrogram) throws IOException {
+			SimilarityMetric.Method method, Dendrogram<String> dendrogram) {
 
 		List<Double> ssw = new ArrayList<Double>();
 		for (int k = 1; k <= dendrogram.size(); ++k) {
@@ -171,7 +171,7 @@ public class HierachicalClustering {
 	}
 	
 	public List<Double> getSSBListForString(Set<String> inputSet, String type,
-			SimilarityMetric.Method method, String normalized, Dendrogram<String> dendrogram) throws IOException {
+			SimilarityMetric.Method method, String normalized, Dendrogram<String> dendrogram) {
 //		Clustering_own clustering_own = new Clustering_own();
 //		WordnetSimilarity wordnetSimilarity = new WordnetSimilarity();
 

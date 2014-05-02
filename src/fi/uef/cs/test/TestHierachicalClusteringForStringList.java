@@ -9,7 +9,7 @@ import com.aliasi.cluster.Dendrogram;
 import fi.uef.cs.ShortTextSimilarity;
 import fi.uef.cs.SimilarityMetric.Method;
 
-public class TestHierachicalClusteringForStringLists {
+public class TestHierachicalClusteringForStringList {
 
 	/**
 	 * @param args
