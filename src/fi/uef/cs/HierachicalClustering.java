@@ -108,7 +108,7 @@ public class HierachicalClustering {
 		return strArray;
 	}
 	
-	public List<Double> getSSWListForString(Set<String> inputSet, Dendrogram<String> dendrogram, HashMap<TwoStrings, Double> similarityMap) {
+	public List<Double> getSSWListForString(Set<String> inputSet, Dendrogram<String> dendrogram, HashMap<UnorderedPair<String>, Double> similarityMap) {
 		List<Double> ssw = new ArrayList<Double>();
 		for (int k = 1; k <= dendrogram.size(); ++k) {
 			Set<Set<String>> slKClustering = dendrogram.partitionK(k);
@@ -130,7 +130,7 @@ public class HierachicalClustering {
 							// double distanceIJ=
 							// wordnetSimilarity.getWordnetSimilarityAll(sI,
 							// sJ,type);
-							double similarityValue = similarityMap.get(new TwoStrings(sI, sJ));
+							double similarityValue = similarityMap.get(new UnorderedPair<String>(sI, sJ));
 							distanceIJ = 1 - similarityValue;
 //							System.out.println(sI + "  " + sJ
 //									+ " the distance is: " + distanceIJ);
@@ -207,7 +207,7 @@ public class HierachicalClustering {
 	}
 	
 	public List<Double> getSSBListForString(Set<String> inputSet,
-			 String normalized, Dendrogram<String> dendrogram, HashMap<TwoStrings, Double> similarityMap) {
+			 String normalized, Dendrogram<String> dendrogram, HashMap<UnorderedPair<String>, Double> similarityMap) {
 //		Clustering_own clustering_own = new Clustering_own();
 //		WordnetSimilarity wordnetSimilarity = new WordnetSimilarity();
 
@@ -237,7 +237,7 @@ public class HierachicalClustering {
 						for (int m = 0; m < sJArray.length; m++) {
 							String temp2String = sJArray[m];
 							
-							double similarityValue = similarityMap.get(new TwoStrings(temp1String, temp2String));
+							double similarityValue = similarityMap.get(new UnorderedPair<String>(temp1String, temp2String));
 							double distanceIJ = 1 - similarityValue;
 
 							distancePairList.add(distanceIJ);

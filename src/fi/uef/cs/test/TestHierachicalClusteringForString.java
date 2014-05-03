@@ -9,6 +9,7 @@ import com.aliasi.cluster.Dendrogram;
 import fi.uef.cs.HierachicalClustering;
 import fi.uef.cs.ShortTextSimilarity;
 import fi.uef.cs.SimilarityMetric.Method;
+import fi.uef.cs.UnorderedPair;
 
 public class TestHierachicalClusteringForString {
 
@@ -25,7 +26,7 @@ public class TestHierachicalClusteringForString {
 		}
 		in.close();
 		ShortTextSimilarity shortTextSimilarity = new ShortTextSimilarity();
-		HashMap<fi.uef.cs.TwoStrings, Double> similarityMap = shortTextSimilarity.getSimilarityMap(data, Method.Jiang);
+		HashMap<UnorderedPair<String>, Double> similarityMap = shortTextSimilarity.getSimilarityMap(data, Method.Jiang);
 		Dendrogram<String> dendro = shortTextSimilarity.getDendrogramForString(data, Method.Jiang, similarityMap);
 		HierachicalClustering hc = new HierachicalClustering();
 		List<Double> sswList = hc.getSSWListForString(new HashSet<String>(data), dendro, similarityMap);
