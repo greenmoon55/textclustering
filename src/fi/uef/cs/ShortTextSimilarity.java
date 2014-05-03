@@ -43,16 +43,27 @@ public class ShortTextSimilarity {
 		return result/wordArray1.size();
 	}
 	
-	public Dendrogram<String> getDendrogramForString(ArrayList<String> data, SimilarityMetric.Method method) {
+	public Dendrogram<String> getDendrogramForString(ArrayList<String> data, SimilarityMetric.Method method, HashMap<TwoStrings, Double> similarityMap) {
 		double[][] similarityMatrix = new double[data.size()][data.size()];
 		for (int i = 0; i < data.size(); i++) {
 			for (int j = i + 1; j < data.size(); j++) {
-				similarityMatrix[i][j] = similarityMatrix[j][i] = this.similarityMetric
-						.getSimilarity(data.get(i), data.get(j), method, "n",
-								false);
+				similarityMatrix[i][j] = similarityMatrix[j][i] = similarityMap.get(new TwoStrings(data.get(i), data.get(j)));
 			}
 		}
 		return HierachicalClustering.getDendrogram(data, method, similarityMatrix);
+	}
+	
+	public HashMap<TwoStrings, Double> getSimilarityMap(ArrayList<String> data,
+			SimilarityMetric.Method method) {
+		HashMap<TwoStrings, Double> map = new HashMap<TwoStrings, Double>();
+		for (int i = 0; i < data.size(); i++) {
+			for (int j = i + 1; j < data.size(); j++) {
+				double value = this.similarityMetric.getSimilarity(data.get(i),
+						data.get(j), method, "n", false);
+				map.put(new TwoStrings(data.get(i), data.get(j)), value);
+			}
+		}
+		return map;
 	}
 	
 	public double[][] getSimilarityMatrix(ArrayList<List<String>> data, SimilarityMetric.Method method) {
@@ -70,6 +81,8 @@ public class ShortTextSimilarity {
 		double[][] similarityMatrix = getSimilarityMatrix(data, method);
 		return HierachicalClustering.getDendrogram(data, method, similarityMatrix);
 	}
+	
+	
 	
 	static class PairScore<E> implements Scored {
         final Dendrogram<E> mDendrogram1;

@@ -25,10 +25,11 @@ public class TestHierachicalClusteringForString {
 		}
 		in.close();
 		ShortTextSimilarity shortTextSimilarity = new ShortTextSimilarity();
-		Dendrogram<String> dendro = shortTextSimilarity.getDendrogramForString(data, Method.Jiang);
+		HashMap<fi.uef.cs.TwoStrings, Double> similarityMap = shortTextSimilarity.getSimilarityMap(data, Method.Jiang);
+		Dendrogram<String> dendro = shortTextSimilarity.getDendrogramForString(data, Method.Jiang, similarityMap);
 		HierachicalClustering hc = new HierachicalClustering();
-		List<Double> sswList = hc.getSSWListForString(new HashSet<String>(data), "n", Method.Jiang, dendro);
-		List<Double> ssbList = hc.getSSBListForString(new HashSet<String>(data), "n", Method.Jiang, "n", dendro);
+		List<Double> sswList = hc.getSSWListForString(new HashSet<String>(data), dendro, similarityMap);
+		List<Double> ssbList = hc.getSSBListForString(new HashSet<String>(data), "n", dendro, similarityMap);
 		for (int i = 0; i < 5; i++) {
 			Set<Set<String>> partitions = dendro.partitionK(i + 1);
 			System.out.println(" ");
