@@ -1,6 +1,5 @@
 package fi.uef.cs;
 
-import java.io.IOException;
 import java.util.*;
 
 import com.aliasi.cluster.*;
@@ -134,7 +133,7 @@ public class HierachicalClustering {
 							// wordnetSimilarity.getWordnetSimilarityAll(sI,
 							// sJ,type);
 							double similarityValue = similarityMetric.getSimilarity(sI, sJ, method, type); 
-							distanceIJ= 1 - similarityValue;
+							distanceIJ = 1 - similarityValue;
 //							System.out.println(sI + "  " + sJ
 //									+ " the distance is: " + distanceIJ);
 //							totaldistance += distanceIJ;
@@ -159,7 +158,7 @@ public class HierachicalClustering {
 //			if ((normalized.trim().equalsIgnoreCase("y")) && (normalizationFactor != 0) )
 //				totaldistance /= normalizationFactor;
 			// System.out.println(k + "  " + slKClustering);
-			ssw.add(maxdistanceAll+ numSingleObject);
+			ssw.add(maxdistanceAll + numSingleObject);
 			//System.out.println(maxdistanceAll);
 //			System.out.println(k + "  " + slKClustering + ". ssw is: "
 //					+ totaldistance);
@@ -195,7 +194,6 @@ public class HierachicalClustering {
 							if (distanceIJ > maxdistance) {
 								maxdistance = distanceIJ;
 							}
-							
 						}
 					}
 				} else {
