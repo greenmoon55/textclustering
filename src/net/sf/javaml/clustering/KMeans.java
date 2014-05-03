@@ -22,6 +22,7 @@
  */
 package net.sf.javaml.clustering;
 
+import java.util.HashSet;
 import java.util.Random;
 
 import net.sf.javaml.core.Dataset;
@@ -147,6 +148,7 @@ public class KMeans implements Clusterer {
         Instance max = DatasetTools.maxAttributes(data);
         this.centroids = new Instance[numberOfClusters];
         int instanceLength = data.instance(0).noAttributes();
+        HashSet<Integer> usedIndices = new HashSet<Integer>();
         for (int j = 0; j < numberOfClusters; j++) {
 //            double[] randomInstance = new double[instanceLength];
 //            for (int i = 0; i < instanceLength; i++) {
@@ -154,8 +156,17 @@ public class KMeans implements Clusterer {
 //                randomInstance[i] = (float) (min.value(i) + rg.nextDouble() * dist);
 //
 //            }
-        	double[] randomInstance = DatasetTools.getRandomInstance(data, rg);
-            this.centroids[j] = new DenseInstance(randomInstance);
+        	int randomIndex;
+        	while (true) {
+        		randomIndex = rg.nextInt(numberOfClusters);
+            	if (!usedIndices.contains(usedIndices)) {
+            		usedIndices.add(randomIndex);
+            		break;
+            	}
+        	}
+        	
+        	//double[] randomInstance = DatasetTools.getRandomInstance(data, rg);
+            this.centroids[j] = data.get(randomIndex);
         }
 
         int iterationCount = 0;
@@ -163,6 +174,7 @@ public class KMeans implements Clusterer {
         boolean randomCentroids = true;
         while (randomCentroids || (iterationCount < this.numberOfIterations && centroidsChanged)) {
             iterationCount++;
+            System.out.println(randomCentroids);
             // Assign each object to the group that has the closest centroid.
             int[] assignment = new int[data.size()];
             for (int i = 0; i < data.size(); i++) {

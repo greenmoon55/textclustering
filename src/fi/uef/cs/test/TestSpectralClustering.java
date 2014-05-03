@@ -19,7 +19,7 @@ import fi.uef.cs.UnnormalizedSpectralClustering;
 public class TestSpectralClustering {
 
 	public static void main(String[] args) throws FileNotFoundException {	
-		Scanner in = new Scanner(new FileReader("stringlists.txt"));
+		Scanner in = new Scanner(new FileReader("stringlists_full.txt"));
 		ArrayList<List<String>> data = new ArrayList<List<String>>();
 		while (in.hasNext()) {
 			data.add(Arrays.asList(in.nextLine().split(",")));
