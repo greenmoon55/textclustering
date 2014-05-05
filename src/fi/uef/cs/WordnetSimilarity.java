@@ -9,10 +9,10 @@ import edu.mit.jwi.item.*;
 
 public class WordnetSimilarity {
 
-	static final String dir = "D:/Software/WordNet";
-	static final String version = "2.1";
+	static final String dir = "/usr/local/WordNet-3.0";
+	static final String version = "3.0";
 
-	JWS ws = new JWS(dir, "2.1");
+	JWS ws = new JWS(dir, "3.0");
 	WuAndPalmer wup = ws.getWuAndPalmer();
 	JiangAndConrath jiang = ws.getJiangAndConrath();
 	
@@ -59,42 +59,43 @@ public class WordnetSimilarity {
 	}
 
 
-	public static HashMap<Integer, String> getWordGloss(String keyword,
-			String type) throws IOException {
-		HashMap<Integer, String> glossMap = new HashMap<Integer, String>();
-		POS postype = null;
-
-		if (type.equalsIgnoreCase("n")) {
-			postype = POS.NOUN;
-		} else if (type.equalsIgnoreCase("v")) {
-			postype = POS.VERB;
-		} else if (type.equalsIgnoreCase("a")) {
-			postype = POS.ADJECTIVE;
-		} else if (type.equalsIgnoreCase("r")) {
-			postype = POS.ADVERB;
-		}
-
-		String path = dir + File.separator + version + File.separator + "dict";
-
-		URL url = new URL("file", null, path);
-
-		IDictionary dict = new Dictionary(url);
-		dict.open();
-
-		IIndexWord idxWord = dict.getIndexWord(keyword, postype);
-
-		IWordID wordID = null;
-
-		for (int i = 0;; i++) {
-			try {
-				wordID = idxWord.getWordIDs().get(i);
-				IWord word = dict.getWord(wordID);
-				glossMap.put(i, word.getSynset().getGloss());
-			} catch (ArrayIndexOutOfBoundsException e) {
-				break;
-			}
-		}
-		return glossMap;
-	}
+//	public static HashMap<Integer, String> getWordGloss(String keyword,
+//			String type) throws IOException {
+//		HashMap<Integer, String> glossMap = new HashMap<Integer, String>();
+//		POS postype = null;
+//
+//		if (type.equalsIgnoreCase("n")) {
+//			postype = POS.NOUN;
+//		} else if (type.equalsIgnoreCase("v")) {
+//			postype = POS.VERB;
+//		} else if (type.equalsIgnoreCase("a")) {
+//			postype = POS.ADJECTIVE;
+//		} else if (type.equalsIgnoreCase("r")) {
+//			postype = POS.ADVERB;
+//		}
+//
+//		//String path = dir + File.separator + version + File.separator + "dict";
+//		String path = dir;
+//
+//		URL url = new URL("file", null, path);
+//
+//		IDictionary dict = new Dictionary(url);
+//		dict.open();
+//
+//		IIndexWord idxWord = dict.getIndexWord(keyword, postype);
+//
+//		IWordID wordID = null;
+//
+//		for (int i = 0;; i++) {
+//			try {
+//				wordID = idxWord.getWordIDs().get(i);
+//				IWord word = dict.getWord(wordID);
+//				glossMap.put(i, word.getSynset().getGloss());
+//			} catch (ArrayIndexOutOfBoundsException e) {
+//				break;
+//			}
+//		}
+//		return glossMap;
+//	}
 
 }
