@@ -15,6 +15,8 @@ public class WordnetSimilarity {
 	JWS ws = new JWS(dir, "2.1");
 	WuAndPalmer wup = ws.getWuAndPalmer();
 	JiangAndConrath jiang = ws.getJiangAndConrath();
+	Lin lin = ws.getLin();
+	Path path = ws.getPath();
 	
 	public double getWordnetSimilarity(String word1, String word2, String type,
 			SimilarityMetric.Method method) {
@@ -23,14 +25,6 @@ public class WordnetSimilarity {
 
 	public double getWordnetSimilarity(String word1, String word2, String type,
 			SimilarityMetric.Method method, boolean firstSenseOnly) {
-		// 1 Jiang
-		JiangAndConrath jiang = ws.getJiangAndConrath();
-		// 2 Wu
-		WuAndPalmer wu = ws.getWuAndPalmer();
-		// 3 Lin
-		Lin lin = ws.getLin();
-		// 4 Path
-		Path path = ws.getPath();
 		double similarityValue = -1;
 		if (firstSenseOnly) {
 			if (method == SimilarityMetric.Method.Jiang) {
@@ -46,7 +40,7 @@ public class WordnetSimilarity {
 			if (method == SimilarityMetric.Method.Jiang) {
 				similarityValue = jiang.max(word1, word2, type);
 			} else if (method == SimilarityMetric.Method.Wu) {
-				similarityValue = wu.max(word1, word2, type);
+				similarityValue = wup.max(word1, word2, type);
 			} else if (method == SimilarityMetric.Method.Lin) {
 				similarityValue = lin.max(word1, word2, type);
 			} else if (method == SimilarityMetric.Method.Path) {
