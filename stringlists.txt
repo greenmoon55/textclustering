@@ -1,4 +1,4 @@
-﻿cafeteria,lunch,soup
+cafeteria,lunch,soup
 Shop,food,store,supermarket
 cobbler
 Chinese,restaurant

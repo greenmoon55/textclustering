@@ -101,6 +101,17 @@ public class ShortTextSimilarity {
 		return similarityMatrix;
 	}
 	
+	public double[][] getSimilarityMatrixForString(List<String> data, SimilarityMetric.Method method) {
+		double[][] similarityMatrix = new double[data.size()][data.size()];
+		for (int i = 0; i < data.size(); i++) {
+			for (int j = i + 1; j < data.size(); j++) {
+				similarityMatrix[i][j] = similarityMatrix[j][i] = similarityMetric.getSimilarity(
+						data.get(i), data.get(j), method, "n", false);
+			}
+		}
+		return similarityMatrix;
+	}
+	
 	public static String[] setToArray(Set<String> set) {
 		// 当参数数组的长度小于list的元素个数时，会自动扩充数组的长度以适应list的长度
 		String[] strArray = (String[]) set.toArray(new String[0]);
