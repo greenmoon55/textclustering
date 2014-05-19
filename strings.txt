@@ -1,4 +1,4 @@
-﻿car
+car
 orange
 bike
 bus

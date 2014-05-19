@@ -208,7 +208,7 @@ public class Stop_criteria {
 
 				if (ssb != 0) {
 
-					value = ssw / ssb;
+					value = k* ssw / ssb;
 					// value = ssw / ssb;
 
 				} else {

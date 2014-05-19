@@ -8,7 +8,7 @@ import com.aliasi.util.ScoredObject;
 import fi.uef.cs.ShortTextSimilarity.PairScore;
 
 public class HierachicalClustering {
-	public static <T> Dendrogram<T> getDendrogram(ArrayList<T> data, SimilarityMetric.Method method, double[][] similarityMatrix) {
+	public static <T> Dendrogram<T> getDendrogram(ArrayList<T> data, double[][] similarityMatrix) {
 		// 数组 elements 变成 LeafDendrogram数组 array
 		LeafDendrogram<T>[] leafs = (LeafDendrogram<T>[]) new LeafDendrogram[data.size()];
 		for (int i = 0; i < data.size(); i++) {

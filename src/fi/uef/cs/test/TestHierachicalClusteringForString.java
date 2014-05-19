@@ -19,28 +19,29 @@ public class TestHierachicalClusteringForString {
 	 */
 	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
-		Scanner in = new Scanner(new FileReader("strings.txt"));
+		Scanner in = new Scanner(new FileReader("strings_long.txt"));
 		ArrayList<String> data = new ArrayList<String>();
 		while (in.hasNext()) {
 			data.add(in.nextLine());
 		}
 		in.close();
 		ShortTextSimilarity shortTextSimilarity = new ShortTextSimilarity();
-		HashMap<UnorderedPair<String>, Double> similarityMap = shortTextSimilarity.getSimilarityMap(data, Method.Jiang);
-		Dendrogram<String> dendro = shortTextSimilarity.getDendrogramForString(data, Method.Jiang, similarityMap);
+		HashMap<UnorderedPair<String>, Double> similarityMap = shortTextSimilarity.getSimilarityMap(data, Method.Path);
+		Dendrogram<String> dendro = shortTextSimilarity.getDendrogramForString(data, similarityMap);
 		HierachicalClustering hc = new HierachicalClustering();
 		List<Double> sswList = hc.getSSWListForString(new HashSet<String>(data), dendro, similarityMap);
 		List<Double> ssbList = hc.getSSBListForString(new HashSet<String>(data), "n", dendro, similarityMap);
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 15; i++) {
+			int k = i + 1;
 			Set<Set<String>> partitions = dendro.partitionK(i + 1);
 			System.out.println(" ");
-			System.out.println(i + " clusters");
+			System.out.println((i + 1) + " clusters");
 			System.out.println(partitions);
 			Double ssw = sswList.get(i);
-			System.out.println("ssw:" + ssw);
+			//System.out.println("ssw:" + ssw);
 			Double ssb = ssbList.get(i);
-			System.out.println("ssb:" + ssb);
-			System.out.println(ssw/ssb);
+			//System.out.println("ssb:" + ssb);
+			System.out.println(k*ssw/ssb);
 		}
 	}
 }

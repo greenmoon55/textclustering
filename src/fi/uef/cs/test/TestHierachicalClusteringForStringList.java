@@ -27,12 +27,12 @@ public class TestHierachicalClusteringForStringList {
 		in.close();
 		ShortTextSimilarity shortTextSimilarity = new ShortTextSimilarity();
 		HashMap<UnorderedPair<List<String>>, Double> similarityMap = shortTextSimilarity.getSimilarityMapForStringList(data, Method.Jiang);
-		Dendrogram<List<String>> dendro = shortTextSimilarity.getDendrogramForStringList(data, Method.Jiang, similarityMap);
+		Dendrogram<List<String>> dendro = shortTextSimilarity.getDendrogramForStringList(data, similarityMap);
 		HierachicalClustering hc = new HierachicalClustering();
 		List<Double> sswList = hc.getSSWListForStringList(dendro, similarityMap);
 		List<Double> ssbList = hc.getSSBListForStringList("n", dendro, similarityMap);
 		double min = 1;
-		for (int i = 0; i < 150; i++) {
+		for (int i = 0; i < 120; i++) {
 			Set<Set<List<String>>> partitions = dendro.partitionK(i + 1);
 			Double ssw = sswList.get(i);
 			Double ssb = ssbList.get(i);
@@ -47,6 +47,11 @@ public class TestHierachicalClusteringForStringList {
 				System.out.println(ssw/ssb);
 			}
 			
+		}
+		for (int i = 0; i < 120; i++) {
+			Double ssw = sswList.get(i);
+			Double ssb = ssbList.get(i);
+			System.out.println(ssw/ssb);
 		}
 		
 

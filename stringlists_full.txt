@@ -29,7 +29,7 @@ cafe,bakery
 cafe,cafeteria
 Hotel,arms,coat
 Museum
-﻿hotel
+hotel
 Pharmacy
 cafe,caterer,lunch
 restaurant,small
