@@ -1,0 +1,59 @@
+1 clusters
+[[bear, water, rabbit, car, cafeteria, cat, bus, taxi, tiger, truck, sea, lake, restaurant, pencil, pen, plane, cafe, train, dog, river]]
+Infinity
+ 
+2 clusters
+[[cafeteria, cafe, restaurant], [bear, water, rabbit, car, cat, bus, taxi, tiger, truck, sea, lake, pencil, pen, plane, train, dog, river]]
+4.785185185185186
+ 
+3 clusters
+[[cafeteria, cafe, restaurant], [water, sea, lake, river], [rabbit, car, bear, cat, bus, taxi, tiger, truck, pencil, pen, plane, train, dog]]
+2.518518518518519
+ 
+4 clusters
+[[cafeteria, cafe, restaurant], [bear, car, rabbit, cat, taxi, bus, tiger, truck, train, dog], [water, sea, lake, river], [pencil, pen, plane]]
+1.6850656307351204
+ 
+5 clusters
+[[cafeteria, cafe, restaurant], [water, sea, lake, river], [bear, car, rabbit, cat, taxi, bus, tiger, truck, train, dog], [plane], [pencil, pen]]
+2.9043834391557004
+ 
+6 clusters
+[[rabbit], [cafeteria, cafe, restaurant], [water, sea, lake, river], [bear, car, cat, taxi, bus, tiger, truck, train, dog], [plane], [pencil, pen]]
+3.4988149697722775
+ 
+7 clusters
+[[rabbit], [cafeteria, cafe, restaurant], [car, taxi, bus, truck, train], [bear, cat, tiger, dog], [water, sea, lake, river], [plane], [pencil, pen]]
+2.478125354078222
+ 
+8 clusters
+[[rabbit], [plane], [water, sea, lake], [pencil, pen], [cafeteria, cafe, restaurant], [bear, cat, tiger, dog], [car, taxi, bus, truck, train], [river]]
+2.923613757205541
+ 
+9 clusters
+[[rabbit], [plane], [water, sea, lake], [pencil, pen], [cafeteria, cafe, restaurant], [car, taxi, bus, truck, train], [dog], [bear, cat, tiger], [river]]
+3.6991409404333138
+ 
+10 clusters
+[[rabbit], [bear], [cat, tiger], [plane], [water, sea, lake], [pencil, pen], [cafeteria, cafe, restaurant], [car, taxi, bus, truck, train], [dog], [river]]
+4.192462145695433
+ 
+11 clusters
+[[rabbit], [bear], [cat, tiger], [plane], [water, sea, lake], [pencil, pen], [cafeteria, cafe, restaurant], [train], [car, taxi, bus, truck], [dog], [river]]
+4.772268523748584
+ 
+12 clusters
+[[rabbit], [bear], [pen], [pencil], [cat, tiger], [plane], [water, sea, lake], [cafeteria, cafe, restaurant], [train], [car, taxi, bus, truck], [dog], [river]]
+7.251734063256502
+ 
+13 clusters
+[[rabbit], [bear], [pen], [pencil], [cat, tiger], [plane], [cafeteria, cafe, restaurant], [train], [lake], [car, taxi, bus, truck], [dog], [water, sea], [river]]
+7.733896466585416
+ 
+14 clusters
+[[rabbit], [water], [bear], [cat, tiger], [cafeteria, cafe, restaurant], [sea], [car, taxi, bus, truck], [lake], [pencil], [pen], [plane], [train], [dog], [river]]
+10.98985916876956
+ 
+15 clusters
+[[rabbit], [water], [bear], [cat, tiger], [truck], [cafeteria, cafe, restaurant], [sea], [lake], [pencil], [pen], [car, taxi, bus], [plane], [train], [dog], [river]]
+12.250446406945018

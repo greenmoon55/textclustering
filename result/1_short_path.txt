@@ -1,0 +1,19 @@
+1 clusters
+[[car, orange, bike, bus, apple]]
+Infinity
+ 
+2 clusters
+[[car, bike, bus], [orange, apple]]
+1.625
+ 
+3 clusters
+[[car, bike, bus], [orange], [apple]]
+4.46875
+ 
+4 clusters
+[[car, bus], [orange], [apple], [bike]]
+5.571428571428571
+ 
+5 clusters
+[[car], [orange], [bike], [bus], [apple]]
+Infinity

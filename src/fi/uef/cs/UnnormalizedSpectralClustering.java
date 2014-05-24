@@ -31,7 +31,7 @@ public class UnnormalizedSpectralClustering {
 		numberOfClusters = number;
 	}
 	
-	public Dataset[] cluster(ArrayList<String> data, double[][] similarityMatrix) {
+	public Dataset[] stringClustering(ArrayList<String> data, double[][] similarityMatrix) {
 		/* Create required matrices */
 		Matrix m = new Matrix(data.size(), data.size());
 		Matrix d = new Matrix(data.size(), data.size());

@@ -146,7 +146,7 @@ public class ShortTextSimilarity {
 			
 			if (maxdistance > maxdistanceAll)
 				maxdistanceAll = maxdistance;				
-		}		
+		}
 		return maxdistanceAll + numSingleObject;
 	}
 	
@@ -181,7 +181,7 @@ public class ShortTextSimilarity {
 		return maxdistanceAll + numSingleObject;
 	}
 	
-	public double getSSBForString(Set<Set<String>> slKClustering, HashMap<UnorderedPair<String>, Double> similarityMap) {
+	public static double getSSBForString(Set<Set<String>> slKClustering, HashMap<UnorderedPair<String>, Double> similarityMap) {
 		double ssbTotal = 0;
 		Object[] objArray = slKClustering.toArray();
 		double ssbDistanceMin = 1000000.0;
@@ -219,7 +219,7 @@ public class ShortTextSimilarity {
 		return ssbTotal;
 	}
 	
-	public double getSSBForStringList(Set<Set<List<String>>> slKClustering, HashMap<UnorderedPair<List<String>>, Double> similarityMap) {
+	public static double getSSBForStringList(Set<Set<List<String>>> slKClustering, HashMap<UnorderedPair<List<String>>, Double> similarityMap) {
 		List<Double> ssb = new ArrayList<Double>();
 			double ssbTotal = 0;
 			Object[] objArray = slKClustering.toArray();

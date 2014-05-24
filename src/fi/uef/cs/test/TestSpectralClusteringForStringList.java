@@ -18,20 +18,20 @@ import fi.uef.cs.SimilarityMetric;
 import fi.uef.cs.UnnormalizedSpectralClustering;
 import fi.uef.cs.SimilarityMetric.Method;
 
-public class TestSpectralClustering {
+public class TestSpectralClusteringForStringList {
 
-	public static void main(String[] args) throws FileNotFoundException {	
+	public static void main(String[] args) throws FileNotFoundException {
 		Scanner in = new Scanner(new FileReader("stringlists.txt"));
 		ArrayList<List<String>> data = new ArrayList<List<String>>();
 		while (in.hasNext()) {
 			data.add(Arrays.asList(in.nextLine().split(",")));
 		}
 		in.close();
+		
 		//shortTextSimilarity.HierachicalClustering(data, SimilarityMetric.Method.Jiang);
-		UnnormalizedSpectralClustering spectralClustering = new UnnormalizedSpectralClustering(5);
+		UnnormalizedSpectralClustering spectralClustering = new UnnormalizedSpectralClustering(2);
 		ShortTextSimilarity shortTextSimilarity = new ShortTextSimilarity();
-		Dataset[] clusters = spectralClustering.stringListClustering(data, shortTextSimilarity.getSimilarityMatrix(data, Method.Jiang));
-		System.out.println(clusters[0].instance(0).classValue());
+		Dataset[] clusters = spectralClustering.stringClustering(data, shortTextSimilarity.getSimilarityMatrixForString(data, Method.Jiang));
 		ClusterEvaluation eval;
 		/* Measuring the quality of the clusters (multiple measures) */
 		eval = new SumOfSquaredErrors();

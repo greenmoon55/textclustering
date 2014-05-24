@@ -32,11 +32,11 @@ public class TestHierachicalClusteringForStringList {
 		List<Double> sswList = hc.getSSWListForStringList(dendro, similarityMap);
 		List<Double> ssbList = hc.getSSBListForStringList("n", dendro, similarityMap);
 		double min = 1;
-		for (int i = 0; i < 120; i++) {
+		for (int i = 0; i < 121; i++) {
 			Set<Set<List<String>>> partitions = dendro.partitionK(i + 1);
 			Double ssw = sswList.get(i);
 			Double ssb = ssbList.get(i);
-			double val = ssw/ssb;
+			double val = (i+1)*ssw/ssb;
 			if (val < min) {
 				min = val;
 				System.out.println(" ");
@@ -48,10 +48,31 @@ public class TestHierachicalClusteringForStringList {
 			}
 			
 		}
-		for (int i = 0; i < 120; i++) {
+		for (int i = 0; i < 122; i++) {
 			Double ssw = sswList.get(i);
 			Double ssb = ssbList.get(i);
-			System.out.println(ssw/ssb);
+			//System.out.println((i+1)*ssw/ssb);
+			int k = i + 1;
+			int dataSize = 122;
+			double CHIndex;
+			if (ssw != 0) {
+				double temp1 = ssb / (k - 1);
+				double temp2 = ssw / (dataSize - k);
+				CHIndex = temp1 / temp2;
+			} else {
+				CHIndex = 0;
+			}
+			System.out.println(CHIndex);
+			double HIndex;
+			if (ssw != 0) {
+				HIndex = Math.log(ssb / ssw);
+			} else {
+				HIndex = 0;
+			}
+			//System.out.println(HIndex);
+			double BHIndex;
+			BHIndex = ssw / k;
+			//System.out.println(BHIndex);
 		}
 		
 
