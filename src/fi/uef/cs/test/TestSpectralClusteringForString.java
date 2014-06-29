@@ -48,15 +48,17 @@ public class TestSpectralClusteringForString {
 		System.out.println(ssb * k / ssw);
 		ClusterEvaluation eval;
 		/* Measuring the quality of the clusters (multiple measures) */
-		eval = new SumOfSquaredErrors();
-		System.out.println("Score according to SumOfSquaredErrors: "
-				+ eval.score(clusters));
-		eval = new SumOfCentroidSimilarities();
-		System.out.println("Score according to SumOfCentroidSimilarities: "
-				+ eval.score(clusters));
-		eval = new SumOfAveragePairwiseSimilarities();
-		System.out.println("Score according to SumOfAveragePairwiseSimilarities: "
-				+ eval.score(clusters));
+		eval = new CIndex();
+		eval.score(clusters);
+//		eval = new SumOfSquaredErrors();
+//		System.out.println("Score according to SumOfSquaredErrors: "
+//				+ eval.score(clusters));
+//		eval = new SumOfCentroidSimilarities();
+//		System.out.println("Score according to SumOfCentroidSimilarities: "
+//				+ eval.score(clusters));
+//		eval = new SumOfAveragePairwiseSimilarities();
+//		System.out.println("Score according to SumOfAveragePairwiseSimilarities: "
+//				+ eval.score(clusters));
 	}
 
 }

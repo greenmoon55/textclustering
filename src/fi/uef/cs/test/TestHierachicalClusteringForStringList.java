@@ -36,7 +36,7 @@ public class TestHierachicalClusteringForStringList {
 			Set<Set<List<String>>> partitions = dendro.partitionK(i + 1);
 			Double ssw = sswList.get(i);
 			Double ssb = ssbList.get(i);
-			double val = (i+1)*ssw/ssb;
+			double val = ssw/ssb;
 			if (val < min) {
 				min = val;
 				System.out.println(" ");
@@ -46,12 +46,11 @@ public class TestHierachicalClusteringForStringList {
 				System.out.println("ssb:" + ssb);
 				System.out.println(ssw/ssb);
 			}
-			
 		}
 		for (int i = 0; i < 122; i++) {
 			Double ssw = sswList.get(i);
 			Double ssb = ssbList.get(i);
-			//System.out.println((i+1)*ssw/ssb);
+			//System.out.println(ssw/ssb);
 			int k = i + 1;
 			int dataSize = 122;
 			double CHIndex;
@@ -62,7 +61,7 @@ public class TestHierachicalClusteringForStringList {
 			} else {
 				CHIndex = 0;
 			}
-			System.out.println(CHIndex);
+			//System.out.println(CHIndex);
 			double HIndex;
 			if (ssw != 0) {
 				HIndex = Math.log(ssb / ssw);

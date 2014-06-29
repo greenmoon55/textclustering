@@ -19,7 +19,7 @@ public class TestHierachicalClusteringForString {
 	 */
 	public static void main(String[] args) throws FileNotFoundException {
 		// TODO Auto-generated method stub
-		Scanner in = new Scanner(new FileReader("strings_long.txt"));
+		Scanner in = new Scanner(new FileReader("strings.txt"));
 		ArrayList<String> data = new ArrayList<String>();
 		int dataSize = 0;
 		while (in.hasNext()) {
